@@ -147,7 +147,7 @@ class RewardTrainerConstructor:
         self.eval_dataset = raw_datasets["validation"]
         self.test_dataset = raw_datasets["test"]
 
-    def load_dataset_rewardbench(self, max_length=None, max_tokens=None, model="all"):
+    def load_dataset_rewardbench(self, max_length=None, max_tokens=None, mode="all"):
         # dataset_name = 'OpenAssistant/oasst1'
         # dataset_name = "Anthropic/hh-rlhf"
         dataset_procesor = DatasetProceserReward.from_datasets(
@@ -166,7 +166,7 @@ class RewardTrainerConstructor:
             batch_size=self.batch_size, eval_mode=True, max_tokens=max_tokens
         )
 
-        if model == "all":
+        if mode == "all":
             self.test_dataset = raw_datasets["test"]
         else:
             rb_all = {}
