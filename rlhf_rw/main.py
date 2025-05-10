@@ -292,7 +292,8 @@ if __name__ == "__main__":
         use_quantization=use_quantization,
         concat=concat,
         use_softprompt=use_softprompt,
-        dataset_name=dataset_name,
+        # dataset_name=dataset_name,
+        dataset_name= "allenai/reward-bench",
         dataset_split=dataset_split,
         fold=fold,
         subsample_percentage=subsample_percentage,
@@ -391,6 +392,6 @@ if __name__ == "__main__":
         )
         print(f"\nFolder path is: {folder_name_path_eval}\n")
         results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
-        with open(folder_name_path_eval + f"/results_dataset_test_{dataset_name}.json", "w") as f:
+        with open(folder_name_path_eval + f"/results_dataset_test_allenai_reward_benchmark.json", "w") as f:
             json.dump(results, f, indent=4)
 
