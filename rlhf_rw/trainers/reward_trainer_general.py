@@ -312,27 +312,27 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             load_local_folder_name=folder_name,
         )
         self.tokenizer = model.tokenizer
-        if self.dataset_name == "allenai/reward-bench":
-            self.load_dataset_rewardbench(
-                max_length=self.max_length, max_tokens=self.max_tokens, mode=mode
-            )
-            if mode == "all":
-                results = {}
-                rb_all_data = self.test_dataset
-                for subset_name, subset_data in rb_all_data.items():
-                    self.test_dataset = subset_data
-                    self.set_trainer_eval()
-                    results[subset_name] = self.trainer.evaluate()
-            else:
-                self.test_dataset = rb_all_data[mode]
+        # if self.dataset_name == "allenai/reward-bench":
+        self.load_dataset_rewardbench(
+            max_length=self.max_length, max_tokens=self.max_tokens, mode=mode
+        )
+        if mode == "all":
+            results = {}
+            rb_all_data = self.test_dataset
+            for subset_name, subset_data in rb_all_data.items():
+                self.test_dataset = subset_data
                 self.set_trainer_eval()
-                results = self.trainer.evaluate()
+                results[subset_name] = self.trainer.evaluate()
         else:
-            self.load_dataset(
-                split=self.dataset_split, eval_mode=True, max_length=self.max_length
-            )
+            self.test_dataset = rb_all_data[mode]
             self.set_trainer_eval()
             results = self.trainer.evaluate()
+        # else:
+        #     self.load_dataset(
+        #         split=self.dataset_split, eval_mode=True, max_length=self.max_length
+        #     )
+        #     self.set_trainer_eval()
+        #     results = self.trainer.evaluate()
         return results
 
     def eval_model_v2(self):

@@ -389,8 +389,8 @@ if __name__ == "__main__":
             fixations_model_version,
             fp_dropout,
         )
-        print(f"\nFolder path is: {folder_name_path}\n")
+        print(f"\nFolder path is: {folder_name_path_eval}\n")
         results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
-        with open(folder_name_path_eval + "/results_dataset_test_evaluate_mode.json", "w") as f:
+        with open(folder_name_path_eval + f"/results_dataset_test_{dataset_name}.json", "w") as f:
             json.dump(results, f, indent=4)
 
