@@ -313,6 +313,7 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
         )
         self.tokenizer = model.tokenizer
         # if self.dataset_name == "allenai/reward-bench":
+        print(f"\n{self.dataset_name}\n")
         self.load_dataset_rewardbench(
             max_length=self.max_length, max_tokens=self.max_tokens, mode=mode
         )
