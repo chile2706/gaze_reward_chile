@@ -109,6 +109,7 @@ class DatasetProceserReward(DatasetProceser):
         max_length=None,
     ):
         if dataset_name == "our_data":
+            print("\nLoad our data\n")
             data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli.csv")
         else:
             if split != "":
