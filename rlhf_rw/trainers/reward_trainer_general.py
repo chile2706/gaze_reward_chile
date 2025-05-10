@@ -118,11 +118,11 @@ def model_init_func(
                 load_local_folder_name = load_local_folder_name[:-1]
             model.base_model.model.fixations_embedding_projector.load_state_dict(
                 torch.load(
-                    load_local_folder_name + "/fixations_projector_state_dict.bin"
+                    load_local_folder_name + "/fixations_projector_state_dict2.bin"
                 )
             )
             model.base_model.model.norm_layer_fix.load_state_dict(
-                torch.load(load_local_folder_name + "/layer_norm_state_dic.bin")
+                torch.load(load_local_folder_name + "/layer_norm_state_dic2.bin")
             )
 
     return model
@@ -137,11 +137,11 @@ class CustomRewardTrainer(RewardTrainer):
             output_dir = output_dir[:-1]
         torch.save(
             self.model.base_model.model.fixations_embedding_projector.state_dict(),
-            output_dir + "/fixations_projector_state_dict.bin",
+            output_dir + "/fixations_projector_state_dict2.bin",
         )
         torch.save(
             self.model.base_model.model.norm_layer_fix.state_dict(),
-            output_dir + "/layer_norm_state_dic.bin",
+            output_dir + "/layer_norm_state_dic2.bin",
         )
 
         print(f"Additional components saved to {output_dir}")
