@@ -320,10 +320,12 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
         if mode == "all":
             results = {}
             rb_all_data = self.test_dataset
-            for subset_name, subset_data in rb_all_data.items():
-                self.test_dataset = subset_data
-                self.set_trainer_eval()
-                results[subset_name] = self.trainer.evaluate()
+            # for subset_name, subset_data in rb_all_data.items():
+            #     self.test_dataset = subset_data
+            #     self.set_trainer_eval()
+            #     results[subset_name] = self.trainer.evaluate()
+            self.set_trainer_eval()
+            results = self.trainer.evaluate()
         else:
             self.test_dataset = rb_all_data[mode]
             self.set_trainer_eval()
