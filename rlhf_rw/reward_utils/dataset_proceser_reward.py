@@ -108,10 +108,13 @@ class DatasetProceserReward(DatasetProceser):
         subsample_percentage=1,
         max_length=None,
     ):
-        if split != "":
-            data = load_dataset(dataset_name, split=split)
+        if dataset_name == "our_data":
+            data = pd.read_csv("../../data/processed_stimuli.csv")
         else:
-            data = load_dataset(dataset_name)
+            if split != "":
+                data = load_dataset(dataset_name, split=split)
+            else:
+                data = load_dataset(dataset_name)
         return cls(
             data=data,
             dataset_name=dataset_name,
@@ -243,7 +246,8 @@ class DatasetProceserReward(DatasetProceser):
             lambda x: pd.Series(self.split_text_human_assistant(x))
         )
         return data_split
-
+    
+    
     def _preprocess_oasst1_split(
         self, data_split: Union[Dataset, pd.DataFrame]
     ) -> pd.DataFrame:
@@ -384,6 +388,8 @@ class DatasetProceserReward(DatasetProceser):
             data_split = self._preprocess_UltraFeedback_split(data_split)
         elif "allenai/reward-bench" in self.dataset_name:
             data_split = self._preprocess_allenai(data_split)
+        elif "our_data" in self.dataset_name:
+            data_split = self._preprocess_hhrlhf_split(data_split)
         # -------- custom preprocessing----------#
         # expects in each row a question, chosen, rejected
         data_split = self._preprocess_convert_chat(data_split, max_length)

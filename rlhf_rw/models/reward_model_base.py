@@ -54,7 +54,7 @@ class MyRewardBase:
         self.features_used = features_used
         self.model_name = model_name
         self.memory_storage = LMDBStorage(
-            db_path="/data/alop/eye_transformer/rlhf_rw/buffer_train.lmdb"
+            db_path="/users/0/le000422/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
 
     def _load_tokenizer(self, load_local_folder_name=None):
