@@ -67,9 +67,57 @@ def get_unique_folder_name(
         folder_path = os.path.join(base_folder, new_folder_name)
         version += 1
         
-    print(f"\nFolder path is: {folder_path}\n")
+    # print(f"\nFolder path is: {folder_path}\n")
     return os.path.join(base_folder, folder_name), folder_path
 
+def get_evaluate_folder_name(base_folder,
+    model_name,
+    dataset_name,
+    concat,
+    use_softprompt,
+    batch_size,
+    train_epochs,
+    gradient_acum_steps,
+    logging_steps,
+    learning_rate,
+    lr_scheduler_type,
+    min_lr_ratio,
+    weight_decay,
+    seed,
+    fixations_model_version,
+    fp_dropout,
+):
+    # Start with the original folder name
+    folder_name = create_folder_name(
+        model_name,
+        dataset_name,
+        concat,
+        use_softprompt,
+        batch_size,
+        train_epochs,
+        gradient_acum_steps,
+        logging_steps,
+        learning_rate,
+        lr_scheduler_type,
+        min_lr_ratio,
+        weight_decay,
+        seed,
+        fixations_model_version,
+        fp_dropout,
+    )
+    folder_path = os.path.join(base_folder, folder_name)
+    # Initialize version number
+    version = 1
+    new_folder_name_test = f"{folder_name}_v{version}"
+    folder_path_test = os.path.join(base_folder, new_folder_name_test)
+    while os.path.exists(folder_path_test):
+        folder_path = folder_path_test
+        version += 1
+        new_folder_name_test = f"{folder_name}_v{version}"
+        folder_path_test = os.path.join(base_folder, new_folder_name_test)
+        
+    print(f"\nFolder path is: {folder_path}\n")
+    return folder_path
 
 def create_folder_name(
     model_name,
@@ -288,6 +336,7 @@ if __name__ == "__main__":
         fixations_model_version,
         fp_dropout,
     )
+    
     if mode == "train":
         # print(f'Model used {reward_trainer.model_name_log}')
         reward_trainer.train_model(
@@ -322,8 +371,26 @@ if __name__ == "__main__":
 
 
     else:
+        folder_name_path_eval = get_evaluate_folder_name(
+            str(pathlib.Path(__file__).parent.resolve().parent.resolve()) + "/models_save/",
+            model_name,
+            dataset_name,
+            concat,
+            use_softprompt,
+            batch_size,
+            train_epochs,
+            gradient_acum_steps,
+            logging_steps,
+            learning_rate,
+            lr_scheduler_type,
+            min_lr_ratio,
+            weight_decay,
+            seed,
+            fixations_model_version,
+            fp_dropout,
+        )
         print(f"\nFolder path is: {folder_name_path}\n")
-        results = reward_trainer.eval_model(folder_name=folder_name_path)
-        with open(folder_name_path + "/results_dataset_test.json", "w") as f:
+        results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
+        with open(folder_name_path_eval + "/results_dataset_test_evaluate_mode.json", "w") as f:
             json.dump(results, f, indent=4)
 
