@@ -66,7 +66,8 @@ def get_unique_folder_name(
         new_folder_name = f"{folder_name}_v{version}"
         folder_path = os.path.join(base_folder, new_folder_name)
         version += 1
-
+        
+    print(f"\nFolder path is: {folder_path}\n")
     return os.path.join(base_folder, folder_name), folder_path
 
 
