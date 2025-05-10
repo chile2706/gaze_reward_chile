@@ -322,6 +322,7 @@ if __name__ == "__main__":
 
 
     else:
+        print(f"\nFolder path is: {folder_name_path}\n")
         results = reward_trainer.eval_model(folder_name=folder_name_path)
         with open(folder_name_path + "/results_dataset_test.json", "w") as f:
             json.dump(results, f, indent=4)
