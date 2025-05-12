@@ -152,13 +152,13 @@ class MyRewardBase:
             fixations_attention_mask = attention_mask
         
         print(f"fixations:\n{fixations}\n")
-        print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
-        print(f"mapped_fixations:\n{mapped_fixations}\n")
+        # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
+        # print(f"mapped_fixations:\n{mapped_fixations}\n")
         # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_10.csv")
         record = {
             "fixations": fixations.cpu().numpy().tolist(),
             "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
-            "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
+            'sentences': sentences            
         }
         with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
             f.write(json.dumps(record) + "\n")
@@ -287,45 +287,46 @@ class MyRewardBase:
             # Attempt to retrieve the result from the cache
             result = self.memory_storage.getItem(hash_id)
 
-            if result is None:
-                # If the result is not in the cache, compute the fixations
-                print("result NOT found")
-                torch_seq = torch.LongTensor(np.asarray(seq)).to(device).unsqueeze(0)
-                (
-                    fixations,
-                    fixations_attention_mask,
-                    mapped_fixations,
-                    text_tokenized_model,
-                    text_tokenized_fix,
-                    sentences,
-                ) = self._compute_fixations(
-                    torch_seq,
-                    attention_mask,
-                    remap=remap,
-                    fixations_model_version=fixations_model_version,
-                )
-                del text_tokenized_fix, text_tokenized_model, sentences
-                if remap:
-                    fixations = mapped_fixations
-                    fixations_attention_mask = attention_mask
-                fixation_outputs = {
-                    "fixations": fixations.cpu(),
-                    "fixations_attention_mask": fixations_attention_mask.cpu(),
-                }
-                self.memory_storage.add(hash_id, fixation_outputs)
-            else:
-                print("result found")
-                # If the result is found in the cache, convert back to tensors
-                fixations = result["fixations"].to(device)
-                fixations_attention_mask = result["fixations_attention_mask"].to(device)
-                record = {
-                    "fixations": fixations.cpu().numpy().tolist(),
-                    "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
-                    # "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
-                }
-                print(record)
-                with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
-                    f.write(json.dumps(record) + "\n")
+            # if result is None:
+            # If the result is not in the cache, compute the fixations
+            print("result NOT found")
+            torch_seq = torch.LongTensor(np.asarray(seq)).to(device).unsqueeze(0)
+            (
+                fixations,
+                fixations_attention_mask,
+                mapped_fixations,
+                text_tokenized_model,
+                text_tokenized_fix,
+                sentences,
+            ) = self._compute_fixations(
+                torch_seq,
+                attention_mask,
+                remap=remap,
+                fixations_model_version=fixations_model_version,
+            )
+            del text_tokenized_fix, text_tokenized_model, sentences
+            if remap:
+                fixations = mapped_fixations
+                fixations_attention_mask = attention_mask
+            fixation_outputs = {
+                "fixations": fixations.cpu(),
+                "fixations_attention_mask": fixations_attention_mask.cpu(),
+            }
+            self.memory_storage.add(hash_id, fixation_outputs)
+            # else:
+            #     print("result found")
+            #     # If the result is found in the cache, convert back to tensors
+            #     fixations = result["fixations"].to(device)
+            #     fixations_attention_mask = result["fixations_attention_mask"].to(device)
+            #     record = {
+            #         "fixations": fixations.cpu().numpy().tolist(),
+            #         "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
+            #         # "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
+            #     }
+            #     print(record)
+            #     with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
+            #         f.write(json.dumps(record) + "\n")
+                    
             if fixations_model_version == 2:
                 idx = np.where(np.array(self.features_used) == 1)[0]
                 fixations = fixations[:, :, idx]
