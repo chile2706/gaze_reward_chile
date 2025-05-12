@@ -27,8 +27,8 @@ def preprocess_data_reward(
         "input_ids_rejected": [],
         "attention_mask_rejected": [],
     }
-    # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli.csv")
-    data.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv")
+    df = pd.DataFrame(data)
+    df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
     for chosen, rejected in zip(data[chosen_name], data[rejected_name]):
         if max_tokens:
             tokenized_chosen = tokenizer(chosen, max_length=max_tokens, truncation=True)
@@ -47,8 +47,8 @@ def preprocess_data_reward(
         data_processed["attention_mask_rejected"].append(
             tokenized_rejected["attention_mask"]
         )
-    
-    data_processed.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv")
+    df = pd.DataFrame(data_processed)
+    df.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv", index=False)
     return data_processed
 
 
@@ -514,7 +514,7 @@ class DatasetProceserReward(DatasetProceser):
                 raise ValueError("Tokenizer is required")
             else:
                 tokenizer = self.tokenizer
-            print(tokenizer.name_or_path)
+            print("tokenizer", tokenizer.name_or_path)
         function_process = partial(
             preprocess_data_reward,
             tokenizer=tokenizer,
