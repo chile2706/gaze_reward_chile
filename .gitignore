@@ -1,4 +1,4 @@
-# Byte-compiled / optimized / DLL files
+m-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -171,3 +171,8 @@ cython_debug/
 .pypirc
 rlhf_rw/cache/
 rlhf_rw/wandb/
+rlhf_rw/train_job.sh
+rlhf_rw/evaluate_job.sh
+rlhf_rw/logs/
+models_save/
+rlhf_rw/buffer_train.lmdb/
