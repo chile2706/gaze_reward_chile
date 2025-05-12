@@ -150,6 +150,11 @@ class MyRewardBase:
             ) = self.FP_model._compute_mapped_fixations(input_ids, attention_mask)
         if remap:
             fixations_attention_mask = attention_mask
+        
+        print(f"fixations:\n{fixations}\n")
+        print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
+        print(f"mapped_fixations:\n{mapped_fixations}\n")
+        
         return (
             fixations,
             fixations_attention_mask,
@@ -158,6 +163,7 @@ class MyRewardBase:
             text_tokenized_fix,
             sentences,
         )
+        
 
     def compute_fixations(
         self, input_ids, attention_mask, remap=False, fixations_model_version=1
