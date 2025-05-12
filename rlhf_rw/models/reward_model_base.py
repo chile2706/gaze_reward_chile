@@ -323,6 +323,7 @@ class MyRewardBase:
                     "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
                     # "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
                 }
+                print(record)
                 with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
                     f.write(json.dumps(record) + "\n")
             if fixations_model_version == 2:
