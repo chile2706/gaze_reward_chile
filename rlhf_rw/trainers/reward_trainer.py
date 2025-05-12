@@ -129,10 +129,12 @@ class RewardTrainerConstructor:
             subsample_percentage=self.subsample_percentage,
             max_length=max_length,
         )
+        
         self.dataset_procesor = dataset_procesor
         raw_datasets = dataset_procesor.preprocess_data_reward(
             batch_size=self.batch_size, eval_mode=eval_mode, max_tokens=max_tokens
         )
+        
         if dataset_procesor.train_samples > 0:
             # Shuffle the dataset
             # shuffled_dataset = dataset.shuffle()
