@@ -318,6 +318,13 @@ class MyRewardBase:
                 # If the result is found in the cache, convert back to tensors
                 fixations = result["fixations"].to(device)
                 fixations_attention_mask = result["fixations_attention_mask"].to(device)
+                record = {
+                    "fixations": fixations.cpu().numpy().tolist(),
+                    "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
+                    # "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
+                }
+                with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
+                    f.write(json.dumps(record) + "\n")
             if fixations_model_version == 2:
                 idx = np.where(np.array(self.features_used) == 1)[0]
                 fixations = fixations[:, :, idx]
