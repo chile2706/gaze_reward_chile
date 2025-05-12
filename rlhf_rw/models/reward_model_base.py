@@ -10,7 +10,7 @@ import hashlib
 
 sys.path.append("../..")
 import numpy as np
-
+import json
 path = str(pathlib.Path(__file__).parent.resolve())
 sys.path.append(path)
 path = str(pathlib.Path(__file__).parent.resolve().parent.resolve())
@@ -151,9 +151,18 @@ class MyRewardBase:
         if remap:
             fixations_attention_mask = attention_mask
         
-        print(f"fixations:\n{fixations}\n")
-        print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
-        print(f"mapped_fixations:\n{mapped_fixations}\n")
+        # print(f"fixations:\n{fixations}\n")
+        # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
+        # print(f"mapped_fixations:\n{mapped_fixations}\n")
+        # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_10.csv")
+        record = {
+            "fixations": fixations.cpu().numpy().tolist(),
+            "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
+            "mapped_fixations": mapped_fixations if mapped_fixations is None else mapped_fixations.cpu().numpy().tolist(),
+        }
+        with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
+            f.write(json.dumps(record) + "\n")
+        
         
         return (
             fixations,
@@ -190,9 +199,9 @@ class MyRewardBase:
         ) = self.compute_fixations_cached(
             input_ids, attention_mask, remap, fixations_model_version
         )
-        print(f"fixations:\n{fixations}\n")
-        print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
-        print(f"mapped_fixations:\n{mapped_fixations}\n")
+        # print(f"fixations:\n{fixations}\n")
+        # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
+        # print(f"mapped_fixations:\n{mapped_fixations}\n")
         
         
         del text_tokenized_fix, text_tokenized_model, sentences
