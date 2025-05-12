@@ -118,6 +118,7 @@ class RewardTrainerConstructor:
     ):
         # dataset_name = 'OpenAssistant/oasst1'
         # dataset_name = "Anthropic/hh-rlhf"
+        print(self.dataset_name)
         dataset_procesor = DatasetProceserReward.from_datasets(
             dataset_name=self.dataset_name,
             train_samples=train_samples,
