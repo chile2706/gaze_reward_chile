@@ -8,6 +8,7 @@ from transformers import AutoTokenizer
 from sklearn.model_selection import KFold
 from typing import Union
 import re
+import json
 
 B_INST, E_INST = "[INST]", "[/INST]"
 B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
@@ -67,10 +68,27 @@ def preprocess_data_reward(
         data_save["attention_mask_rejected"].append(
             tokenized_rejected["attention_mask"]
         )
-        
-        
-    df = pd.DataFrame(data_save)
-    df.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv", index=False)
+    with open("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.jsonl", "a") as f:
+        for record in zip(
+            data_save[f"{chosen_name}"],
+            data_save["input_ids_chosen"],
+            data_save["attention_mask_chosen"],
+            data_save[f"{rejected_name}"],
+            data_save["input_ids_rejected"],
+            data_save["attention_mask_rejected"],
+        ):
+            json_obj = {
+                f"{chosen_name}": record[0],
+                "input_ids_chosen": record[1],
+                "attention_mask_chosen": record[2],
+                 f"{rejected_name}": record[3],
+                "input_ids_rejected": record[4],
+                "attention_mask_rejected": record[5],
+            }
+            f.write(json.dumps(json_obj) + "\n")
+
+    # df = pd.DataFrame(data_save)
+    # df.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv", index=False)
     return data_processed
 
 
