@@ -1,0 +1,478 @@
+,Unnamed: 0,chosen,rejected,chosen_score,rejected_score,question
+0,0,"
+
+Human: What's a good educational TV show for my 4 year old to watch?
+
+Assistant: I think there are a lot of good ones out there, but a good starting point might be Sesame Street, which has been on the air for 45 years.
+
+Human: That's a good one, but he's seen a lot of it already. Any other ideas?
+
+Assistant: One of my favorites is Daniel Tiger's Neighborhood, which features Mr. Daniel Tiger, who's a very encouraging neighbor to all the kids who come to his house. They help him with his work, and he's there to support them through fun activities.
+
+Human: Do you know any others? They don't have to be new or recent
+
+Assistant: Oh, there are many, many great shows out there! Here are a few others: 
+
+Kipper, Arthur, and Paws.
+
+
+Doogie Howser, M.D.
+
+
+Sesame Street.
+
+
+Blue's Clues.
+
+
+Yo Gabba Gabba!
+
+
+I have a Little Pony.
+
+
+Cake Boss.
+
+
+Power Rangers.
+
+
+Shimmer and Shine.
+
+
+Antiques Roadshow.
+
+
+Beakman's World.
+
+
+Chopped Junior.
+
+
+Deal or No Deal Junior.
+
+
+R.L. Stine's The Haunting Hour.
+
+
+Monsters vs. Aliens.
+
+
+SpongeBob SquarePants.
+
+
+iCarly.
+
+
+Ace and Otto.
+
+
+Max and Ruby.
+
+
+WordGirl.
+
+
+The Cat in the Hat Knows a Lot About That!
+
+
+The Magic School Bus.
+
+
+Franklin.
+
+
+Little Einsteins.
+
+
+Professor Xavier.
+
+
+Caillou.
+
+
+Drake and Josh.
+
+
+Between the Lions.
+
+
+Super Why.
+
+
+Poppy Cat.
+
+
+Instant Mom.
+
+
+Team","
+
+Human: What's a good educational TV show for my 4 year old to watch?
+
+Assistant: I think there are a lot of good ones out there, but a good starting point might be Sesame Street, which has been on the air for 45 years.
+
+Human: That's a good one, but he's seen a lot of it already. Any other ideas?
+
+Assistant: One of my favorites is Daniel Tiger's Neighborhood, which features Mr. Daniel Tiger, who's a very encouraging neighbor to all the kids who come to his house. They help him with his work, and he's there to support them through fun activities.
+
+Human: Do you know any others? They don't have to be new or recent
+
+Assistant: Well one I've enjoyed recently is Elena of Avalor. It's an animated Disney show about a teen princess, Elena. She's on a quest to find her missing parents, and has an enormous amount of wisdom for her age.",2.8907497,1.6140277,"
+
+Human: What's a good educational TV show for my 4 year old to watch?
+
+Assistant: I think there are a lot of good ones out there, but a good starting point might be Sesame Street, which has been on the air for 45 years.
+
+Human: That's a good one, but he's seen a lot of it already. Any other ideas?
+
+Assistant: One of my favorites is Daniel Tiger's Neighborhood, which features Mr. Daniel Tiger, who's a very encouraging neighbor to all the kids who come to his house. They help him with his work, and he's there to support them through fun activities.
+
+Human: Do you know any others? They don't have to be new or recent
+
+"
+1,1,"
+
+Human: I'd like to comfort a friend who recently flunked a test. Do you have any thoughts?
+
+Assistant: Sure! Here's some sentences that might be encouraging and comforting:
+
+""I can relate to how disappointing it can be to get a bad grade.""
+
+""I've felt bad about getting a bad grade before, too. I remember...""
+
+""It's easy to feel anxious about your future when you've had a bad grade.""
+
+""Everyone gets nervous about tests.""
+
+""Everyone can improve.""
+
+Human: Perhaps those would be useful. I don't want to rub their face in it though. Can you think of potentially more neutral and validating responses?
+
+Assistant: Of course. How about these:
+
+""I'm sure you put in a lot of effort.""
+
+""You're a hard worker.""
+
+""It's hard not to get upset when you've worked so hard.""
+
+""We all feel down sometimes.""","
+
+Human: I'd like to comfort a friend who recently flunked a test. Do you have any thoughts?
+
+Assistant: Sure! Here's some sentences that might be encouraging and comforting:
+
+""I can relate to how disappointing it can be to get a bad grade.""
+
+""I've felt bad about getting a bad grade before, too. I remember...""
+
+""It's easy to feel anxious about your future when you've had a bad grade.""
+
+""Everyone gets nervous about tests.""
+
+""Everyone can improve.""
+
+Human: Perhaps those would be useful. I don't want to rub their face in it though. Can you think of potentially more neutral and validating responses?
+
+Assistant: Sure, here are a few other ideas:
+
+""It's good that you're upset about it.""
+
+""Everyone gets nervous about tests.""
+
+""It's possible to do better next time.""
+
+""It seems like you're really upset about it, and I hear that.""",1.0176332,0.8031715,"
+
+Human: I'd like to comfort a friend who recently flunked a test. Do you have any thoughts?
+
+Assistant: Sure! Here's some sentences that might be encouraging and comforting:
+
+""I can relate to how disappointing it can be to get a bad grade.""
+
+""I've felt bad about getting a bad grade before, too. I remember...""
+
+""It's easy to feel anxious about your future when you've had a bad grade.""
+
+""Everyone gets nervous about tests.""
+
+""Everyone can improve.""
+
+Human: Perhaps those would be useful. I don't want to rub their face in it though. Can you think of potentially more neutral and validating responses?
+
+"
+2,2,"
+
+Human: Does the quality of your bed make that much of a difference in how well you sleep? I need a new one, but don't know if I should get an expensive one.
+
+Assistant: Yes, quality does matter. It’s actually not that hard to find very good cheap beds, but it is really worth it to splurge a bit on a higher quality bed. For example, with high quality you will find that the bed adjusts much better to you body shape as you get in and out of bed, and it will have multiple adjustment features. Additionally, as with all furniture, the better the bed, the more durable it will be. Some cheap beds are easily broken and need replacing after just a few years. And you will also find that as you get older and your body changes, a cheap bed will not be as comfortable as a quality one that has been well made and adjusted over the years.","
+
+Human: Does the quality of your bed make that much of a difference in how well you sleep? I need a new one, but don't know if I should get an expensive one.
+
+Assistant: Actually, in my experience, the main thing that determines how well you sleep is if you’re comfortable, rather than if the bed has a specific quality or not.",2.0906088,0.8472005,"
+
+Human: Does the quality of your bed make that much of a difference in how well you sleep? I need a new one, but don't know if I should get an expensive one.
+
+"
+3,3,"
+
+Human: I want to visit an island with a good beach. Do you know of any?
+
+Assistant: I think the Maldives is pretty good. It has a good nightlife too.
+
+Human: Are the beaches clean in the Maldives?
+
+Assistant: I don’t really know the Maldives, but on the average the Indian Ocean is very clean.
+
+Human: And what's the weather like in the Maldives?
+
+Assistant: It's warm all year round. But there are seasonal changes, like April - June is windy, July-September are summer months.
+
+Human: Thank you so much for that info!
+
+Assistant: No problem! If you ever need more help just ask.","
+
+Human: I want to visit an island with a good beach. Do you know of any?
+
+Assistant: I think the Maldives is pretty good. It has a good nightlife too.
+
+Human: Are the beaches clean in the Maldives?
+
+Assistant: I don’t really know the Maldives, but on the average the Indian Ocean is very clean.
+
+Human: And what's the weather like in the Maldives?
+
+Assistant: It's warm all year round. But there are seasonal changes, like April - June is windy, July-September are summer months.
+
+Human: Thank you so much for that info!
+
+Assistant: I hope it helps.",0.5475332,-0.32068777,"
+
+Human: I want to visit an island with a good beach. Do you know of any?
+
+Assistant: I think the Maldives is pretty good. It has a good nightlife too.
+
+Human: Are the beaches clean in the Maldives?
+
+Assistant: I don’t really know the Maldives, but on the average the Indian Ocean is very clean.
+
+Human: And what's the weather like in the Maldives?
+
+Assistant: It's warm all year round. But there are seasonal changes, like April - June is windy, July-September are summer months.
+
+Human: Thank you so much for that info!
+
+"
+4,4,"
+
+Human: Can you tell me why super bowl commercials are so expensive for companies?
+
+Assistant: I think the purpose of the Super Bowl is to promote a single product, but it seems to me the specific commercials also have many purposes.  Some of the purposes may include:
+
+  - Advertising product features
+  - Selling products (e.g. Coca Cola has a famous “Coca Cola is the Real Thing” commercial)
+  - Reassuring customers that they are doing well
+  - Telling a story
+  - Making people laugh
+  - Using the emotional reaction of the viewer to sell the product (these “tear jerking” commercials were very popular in the 1990s, but they have been much less common in recent years)","
+
+Human: Can you tell me why super bowl commercials are so expensive for companies?
+
+Assistant: Sure, but you have to give me some context first. Why do you want to know about commercials? Do you watch the super bowl?",-1.1072266,-2.6957922,"
+
+Human: Can you tell me why super bowl commercials are so expensive for companies?
+
+"
+5,5,"
+
+Human: Why do child TV stars have such a hard time later in life?
+
+Assistant: I think it’s a little unfair to judge them based on their early successes. They have an entire lifetime to build a strong and positive self-image, and maybe they get a few years to feel like they’re famous and popular and successful, which they’re also entitled to. The odds of the early years of an entertainment career leading to some sort of meaningful professional path is extremely low, so it can take many years to figure out a different path for oneself.  I think it’s also interesting","
+
+Human: Why do child TV stars have such a hard time later in life?
+
+Assistant: Gosh, I don’t know. Why don’t you tell me why you think that’s true, and we’ll go from there?",-2.8273175,-2.4078226,"
+
+Human: Why do child TV stars have such a hard time later in life?
+
+"
+6,6,"
+
+Human: Search for a chicken salad recipe
+
+Assistant: Here’s a few:
+
+http://www.bonappetit.com/recipe/chicken-salad
+
+http://www.spoonforkbacon.com/2013/05/27/chicken-salad-with-gouda-broccoli-fries/
+
+http://www.roadfood.com/Forums/topic/11918/chicken-salad-recipe-advice-needed/
+
+Human: The links do not work.
+
+Assistant: Sorry, these links are a list of my favorites. I don’t have the links in the first position, but I’d be happy to try to find them and link to them for you.","
+
+Human: Search for a chicken salad recipe
+
+Assistant: Here’s a few:
+
+http://www.bonappetit.com/recipe/chicken-salad
+
+http://www.spoonforkbacon.com/2013/05/27/chicken-salad-with-gouda-broccoli-fries/
+
+http://www.roadfood.com/Forums/topic/11918/chicken-salad-recipe-advice-needed/
+
+Human: The links do not work.
+
+Assistant: I don’t have a recipe to send you yet, but I’ll give you some options. Can you give me a little more time, and I’ll try to come up with a few?",-2.5275497,-3.0921345,"
+
+Human: Search for a chicken salad recipe
+
+Assistant: Here’s a few:
+
+http://www.bonappetit.com/recipe/chicken-salad
+
+http://www.spoonforkbacon.com/2013/05/27/chicken-salad-with-gouda-broccoli-fries/
+
+http://www.roadfood.com/Forums/topic/11918/chicken-salad-recipe-advice-needed/
+
+Human: The links do not work.
+
+"
+7,7,"
+
+Human: I'd like to start getting into Shakespeare but I don't know where to begin. What would you recommend?
+
+Assistant: Do you mean, what would you recommend as an entry point into Shakespeare's works?","
+
+Human: I'd like to start getting into Shakespeare but I don't know where to begin. What would you recommend?
+
+Assistant: What do you want to get out of learning about Shakespeare?",0.3395647,-2.1649735,"
+
+Human: I'd like to start getting into Shakespeare but I don't know where to begin. What would you recommend?
+
+"
+8,8,"
+
+Human: What color is the sky?
+
+Assistant: The sky is many, many different colors.
+
+Human: Okay, but originally what color is it on a sunny day?
+
+Assistant: The sky is blue, but the color of the blue is dependent on atmospheric conditions. It’s blue at high altitude, and less blue
+
+Human: Okay, and what does it mean when the sky turns green?
+
+Assistant: When atmospheric conditions change, it means there are lots of tiny particles in the air, usually from volcanic eruptions.  These are called aerosols, and can make the sky turn yellow, orange, or red.  When these aerosols are in the air for
+
+Human: Yeah, but what is the event called primarily occurring in Iceland? When the sky is green and light shines through it?
+
+Assistant: You mean a ‘green flash’?  Yes, the sky turning green in this way, though rare, is more common in Iceland.
+
+Human: What qualifications does a doctor need?
+
+Assistant: A medical doctor must first graduate from high school or its equivalent.  After that, many doctors choose to go to a medical school, or a university’s medical school, where they","
+
+Human: What color is the sky?
+
+Assistant: The sky is many, many different colors.
+
+Human: Okay, but originally what color is it on a sunny day?
+
+Assistant: The sky is blue, but the color of the blue is dependent on atmospheric conditions. It’s blue at high altitude, and less blue
+
+Human: Okay, and what does it mean when the sky turns green?
+
+Assistant: When atmospheric conditions change, it means there are lots of tiny particles in the air, usually from volcanic eruptions.  These are called aerosols, and can make the sky turn yellow, orange, or red.  When these aerosols are in the air for
+
+Human: Yeah, but what is the event called primarily occurring in Iceland? When the sky is green and light shines through it?
+
+Assistant: You mean a ‘green flash’?  Yes, the sky turning green in this way, though rare, is more common in Iceland.
+
+Human: What qualifications does a doctor need?
+
+Assistant: To be a doctor you’ll need a bachelor’s degree, and",-1.3502793,-1.4954652,"
+
+Human: What color is the sky?
+
+Assistant: The sky is many, many different colors.
+
+Human: Okay, but originally what color is it on a sunny day?
+
+Assistant: The sky is blue, but the color of the blue is dependent on atmospheric conditions. It’s blue at high altitude, and less blue
+
+Human: Okay, and what does it mean when the sky turns green?
+
+Assistant: When atmospheric conditions change, it means there are lots of tiny particles in the air, usually from volcanic eruptions.  These are called aerosols, and can make the sky turn yellow, orange, or red.  When these aerosols are in the air for
+
+Human: Yeah, but what is the event called primarily occurring in Iceland? When the sky is green and light shines through it?
+
+Assistant: You mean a ‘green flash’?  Yes, the sky turning green in this way, though rare, is more common in Iceland.
+
+Human: What qualifications does a doctor need?
+
+"
+9,9,"
+
+Human: Can you tell me how to make soup?
+
+Assistant: What kind of soup do you want to make?
+
+Human: French onion soup
+
+Assistant: Are you interested in making classic French onion soup, or did you want something more exotic?
+
+Human: Ooh maybe something more exotic
+
+Assistant: I think I have a good idea for a non-classic French onion soup recipe.  You can look it up online and use the ingredients, or we could work through it step-by-step.
+
+Human: Yes let's work through it together
+
+Assistant: Alright, if I can remember it right it's something like:  
+
+
+2T vegetable oil or other cooking fat
+1/2C chopped onions (about 2 onions)
+3 cloves garlic, minced
+2C sliced mushrooms
+2T chopped parsley
+4T dry white wine (maybe less, check the recipe)
+2T flour
+1C milk (maybe less)
+salt and pepper to taste
+
+Can I get a thumbs-up when you've added something in so I know we're both on the same page?","
+
+Human: Can you tell me how to make soup?
+
+Assistant: What kind of soup do you want to make?
+
+Human: French onion soup
+
+Assistant: Are you interested in making classic French onion soup, or did you want something more exotic?
+
+Human: Ooh maybe something more exotic
+
+Assistant: I think I have a good idea for a non-classic French onion soup recipe.  You can look it up online and use the ingredients, or we could work through it step-by-step.
+
+Human: Yes let's work through it together
+
+Assistant: Great!   The first step is to gather all the ingredients.  Do you have all of these?",2.7125027,-0.35222635,"
+
+Human: Can you tell me how to make soup?
+
+Assistant: What kind of soup do you want to make?
+
+Human: French onion soup
+
+Assistant: Are you interested in making classic French onion soup, or did you want something more exotic?
+
+Human: Ooh maybe something more exotic
+
+Assistant: I think I have a good idea for a non-classic French onion soup recipe.  You can look it up online and use the ingredients, or we could work through it step-by-step.
+
+Human: Yes let's work through it together
+
+"
