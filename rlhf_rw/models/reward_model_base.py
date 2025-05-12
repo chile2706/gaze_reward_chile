@@ -184,7 +184,13 @@ class MyRewardBase:
         ) = self.compute_fixations_cached(
             input_ids, attention_mask, remap, fixations_model_version
         )
+        print(f"fixations:\n{fixations}\n")
+        print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
+        print(f"mapped_fixations:\n{mapped_fixations}\n")
+        
+        
         del text_tokenized_fix, text_tokenized_model, sentences
+        
         fixations_normalized, fixations_attention_mask = self.process_fixations(
             fixations,
             fixations_attention_mask,
