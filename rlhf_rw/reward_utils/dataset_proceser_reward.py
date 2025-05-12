@@ -27,9 +27,20 @@ def preprocess_data_reward(
         "input_ids_rejected": [],
         "attention_mask_rejected": [],
     }
-    df = pd.DataFrame(data)
-    df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
+    data_save = {
+        f"{chosen_name}": [],
+        "input_ids_chosen": [],
+        "attention_mask_chosen": [],
+        f"{rejected_name}": [],
+        "input_ids_rejected": [],
+        "attention_mask_rejected": [],
+    }
+    
+    # df = pd.DataFrame(data)
+    # df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
     for chosen, rejected in zip(data[chosen_name], data[rejected_name]):
+        data_save[f"{chosen_name}"].append(chosen)
+        data_save[f"{rejected_name}"].append(rejected)
         if max_tokens:
             tokenized_chosen = tokenizer(chosen, max_length=max_tokens, truncation=True)
             tokenized_rejected = tokenizer(
@@ -47,7 +58,18 @@ def preprocess_data_reward(
         data_processed["attention_mask_rejected"].append(
             tokenized_rejected["attention_mask"]
         )
-    df = pd.DataFrame(data_processed)
+        
+        data_save["input_ids_chosen"].append(tokenized_chosen["input_ids"])
+        data_save["attention_mask_chosen"].append(
+            tokenized_chosen["attention_mask"]
+        )
+        data_save["input_ids_rejected"].append(tokenized_rejected["input_ids"])
+        data_save["attention_mask_rejected"].append(
+            tokenized_rejected["attention_mask"]
+        )
+        
+        
+    df = pd.DataFrame(data_save)
     df.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv", index=False)
     return data_processed
 
