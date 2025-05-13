@@ -29,20 +29,20 @@ def preprocess_data_reward(
         "input_ids_rejected": [],
         "attention_mask_rejected": [],
     }
-    data_save = {
-        f"{chosen_name}": [],
-        "input_ids_chosen": [],
-        "attention_mask_chosen": [],
-        f"{rejected_name}": [],
-        "input_ids_rejected": [],
-        "attention_mask_rejected": [],
-    }
+    # data_save = {
+    #     f"{chosen_name}": [],
+    #     "input_ids_chosen": [],
+    #     "attention_mask_chosen": [],
+    #     f"{rejected_name}": [],
+    #     "input_ids_rejected": [],
+    #     "attention_mask_rejected": [],
+    # }
     print("preprocess_data_reward")
     # df = pd.DataFrame(data)
     # df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
     for chosen, rejected in zip(data[chosen_name], data[rejected_name]):
-        data_save[f"{chosen_name}"].append(chosen)
-        data_save[f"{rejected_name}"].append(rejected)
+        # data_save[f"{chosen_name}"].append(chosen)
+        # data_save[f"{rejected_name}"].append(rejected)
         if max_tokens:
             tokenized_chosen = tokenizer(chosen, max_length=max_tokens, truncation=True)
             tokenized_rejected = tokenizer(
@@ -61,32 +61,32 @@ def preprocess_data_reward(
             tokenized_rejected["attention_mask"]
         )
         
-        data_save["input_ids_chosen"].append(tokenized_chosen["input_ids"])
-        data_save["attention_mask_chosen"].append(
-            tokenized_chosen["attention_mask"]
-        )
-        data_save["input_ids_rejected"].append(tokenized_rejected["input_ids"])
-        data_save["attention_mask_rejected"].append(
-            tokenized_rejected["attention_mask"]
-        )
-    with open("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.jsonl", "a") as f:
-        for record in zip(
-            data_save[f"{chosen_name}"],
-            data_save["input_ids_chosen"],
-            data_save["attention_mask_chosen"],
-            data_save[f"{rejected_name}"],
-            data_save["input_ids_rejected"],
-            data_save["attention_mask_rejected"],
-        ):
-            json_obj = {
-                f"{chosen_name}": record[0],
-                "input_ids_chosen": record[1],
-                "attention_mask_chosen": record[2],
-                 f"{rejected_name}": record[3],
-                "input_ids_rejected": record[4],
-                "attention_mask_rejected": record[5],
-            }
-            f.write(json.dumps(json_obj) + "\n")
+        # data_save["input_ids_chosen"].append(tokenized_chosen["input_ids"])
+        # data_save["attention_mask_chosen"].append(
+        #     tokenized_chosen["attention_mask"]
+        # )
+        # data_save["input_ids_rejected"].append(tokenized_rejected["input_ids"])
+        # data_save["attention_mask_rejected"].append(
+        #     tokenized_rejected["attention_mask"]
+        # )
+    # with open("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.jsonl", "a") as f:
+    #     for record in zip(
+    #         data_save[f"{chosen_name}"],
+    #         data_save["input_ids_chosen"],
+    #         data_save["attention_mask_chosen"],
+    #         data_save[f"{rejected_name}"],
+    #         data_save["input_ids_rejected"],
+    #         data_save["attention_mask_rejected"],
+    #     ):
+    #         json_obj = {
+    #             f"{chosen_name}": record[0],
+    #             "input_ids_chosen": record[1],
+    #             "attention_mask_chosen": record[2],
+    #              f"{rejected_name}": record[3],
+    #             "input_ids_rejected": record[4],
+    #             "attention_mask_rejected": record[5],
+    #         }
+    #         f.write(json.dumps(json_obj) + "\n")
 
     # df = pd.DataFrame(data_save)
     # df.to_csv("/users/0/le000422/gaze_reward_chile/data/after_preprocess_data_reward.csv", index=False)
@@ -293,11 +293,11 @@ class DatasetProceserReward(DatasetProceser):
         )
         print("this is _preprocess_hhrlhf_split")
         # df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
-        filename = "/users/0/le000422/gaze_reward_chile/data/preprocess_hhrlhf_split.csv"
-        if not os.path.exists(filename):
-            data_split.to_csv(filename, index=False)  # write with header
-        else:
-            data_split.to_csv(filename, mode='a', header=False, index=False)  # append without header
+        # filename = "/users/0/le000422/gaze_reward_chile/data/preprocess_hhrlhf_split.csv"
+        # if not os.path.exists(filename):
+        #     data_split.to_csv(filename, index=False)  # write with header
+        # else:
+        #     data_split.to_csv(filename, mode='a', header=False, index=False)  # append without header
         # print(data_split.columns.to_list())
         # data_split
         return data_split
