@@ -65,9 +65,11 @@ class MyRewardBase:
                 self.model_name, trust_remote_code=True
             )
         if tokenizer.chat_template is None:
+            print("if tokenizer.chat_template is None:")
             tokenizer.chat_template = tokenizer.default_chat_template
         tokenizer.add_eos_token = True
         if tokenizer.pad_token is None:
+            print("if tokenizer.pad_token is None:")
             tokenizer.add_special_tokens({"pad_token": "<PAD>"})
         tokenizer.padding_side = "right"
         chat_tokens = list(set(re.findall(r"(<.*?>)", tokenizer.default_chat_template)))
