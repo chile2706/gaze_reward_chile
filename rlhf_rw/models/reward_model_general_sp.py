@@ -154,6 +154,7 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
             inputs_embeds = self.model.embed_tokens(input_ids.to("cuda"))
             attention_mask = attention_mask.to("cuda")
             if self.use_softprompt:
+                print("MyRewardConcatenate.forward")
                 # TODO: change code so the fixations use the chached code
                 # mapped_fixations = self.forward_cached(input_ids)
                 fixations_normalized, fixations_attention = self.compute_fixations(
@@ -162,6 +163,7 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
                     remap=False,
                     fixations_model_version=self.fixations_model_version,
                 )
+                
                 # concat  fixations
                 concat_tokens_embed = self.model.embed_tokens(
                     torch.tensor(self.concat_tokens_ids).to("cuda")

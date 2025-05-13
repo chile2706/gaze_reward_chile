@@ -139,6 +139,7 @@ class MyRewardBase:
                 text_tokenized_fix,
                 sentences,
             ) = self.FP_model._compute_mapped_fixations(input_ids)
+            print("compute fixations")
         elif fixations_model_version == 2:
             (
                 fixations,
@@ -151,16 +152,18 @@ class MyRewardBase:
         if remap:
             fixations_attention_mask = attention_mask
         
-        print(f"fixations:\n{fixations}\n")
+        # print(f"fixations:\n{fixations}\n")
         # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
         # print(f"mapped_fixations:\n{mapped_fixations}\n")
         # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_10.csv")
         record = {
+            "sentences": sentences,
+            "input_ids": input_ids.cpu().numpy().tolist(),
             "fixations": fixations.cpu().numpy().tolist(),
             "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
-            'sentences': sentences            
+                        
         }
-        with open("/users/0/le000422/gaze_reward_chile/data/fixation_records.jsonl", "a") as f:
+        with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation.jsonl", "a") as f:
             f.write(json.dumps(record) + "\n")
         
         
