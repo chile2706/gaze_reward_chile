@@ -176,3 +176,4 @@ rlhf_rw/evaluate_job.sh
 rlhf_rw/logs/
 models_save/
 rlhf_rw/buffer_train.lmdb/
+data/normalized_fixations.jsonl

@@ -204,6 +204,7 @@ class DatasetProceser:
 
     @staticmethod
     def _format_chat(tokenizer: AutoTokenizer, data):
+        print("\nFormat chat\n\n")
         # The function tok should never generate the EOS token, however FastChat (used in vLLM) sends the full prompt as a string which might lead to incorrect tokenization of the EOS token and prompt injection. Users are encouraged to send tokens instead as described above.
         return tokenizer.apply_chat_template(
             data, tokenize=False, add_generation_prompt=False
