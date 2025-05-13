@@ -61,6 +61,7 @@ class MyRewardBase:
         if load_local_folder_name:
             tokenizer = AutoTokenizer.from_pretrained(load_local_folder_name)
         else:
+            print("tokenizer = AutoTokenizer.from_pretrained(")
             tokenizer = AutoTokenizer.from_pretrained(
                 self.model_name, trust_remote_code=True
             )
