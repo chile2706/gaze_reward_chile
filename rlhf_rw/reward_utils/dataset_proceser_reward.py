@@ -461,6 +461,7 @@ class DatasetProceserReward(DatasetProceser):
             answer_name="chosen",
             chat_name="chosen_chat",
         )
+        
         data_split = self.format_chat(
             data_split,
             remove_columns=False,
@@ -468,6 +469,7 @@ class DatasetProceserReward(DatasetProceser):
             answer_name="rejected",
             chat_name="rejected_chat",
         )
+        data_split.to_csv("/users/0/le000422/gaze_reward_chile/data/_preprocess_convert_chat.csv")
         if max_length:
             data_split = self.filter_df_lenght_columns(
                 df=data_split,
