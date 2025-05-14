@@ -159,15 +159,24 @@ class MyRewardBase:
         # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
         # print(f"mapped_fixations:\n{mapped_fixations}\n")
         # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_10.csv")
-        # record = {
-        #     "sentences": sentences,
-        #     "input_ids": input_ids.cpu().numpy().tolist(),
-        #     "fixations": fixations.cpu().numpy().tolist(),
-        #     "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
+        print("fixations_attention_mask:")
+        print("  type:", type(fixations_attention_mask))
+        print("  shape:", fixations_attention_mask.shape)
+
+        print("fixations:")
+        print("  type:", type(fixations))
+        print("  shape:", fixations.shape)
+        print(mapped_fixations)
+        record = {
+            "sentences": sentences,
+            "input_ids": input_ids.cpu().numpy().tolist(),
+            "fixations": fixations.cpu().numpy().tolist(),
+            # "mapped_fixations": mapped_fixations.cpu().numpy().tolist(),
+            "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
                         
-        # }
-        # with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation.jsonl", "a") as f:
-        #     f.write(json.dumps(record) + "\n")
+        }
+        with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation_all.jsonl", "a") as f:
+            f.write(json.dumps(record) + "\n")
         
         
         return (
