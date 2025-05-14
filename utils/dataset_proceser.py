@@ -106,6 +106,7 @@ class DatasetProceser:
 
         # check if is already in the correct format
         if isinstance(df.iloc[0][answer_name][0], dict):
+            # print("if isinstance(df.iloc[0][answer_name][0], dict):")
             if (
                 "content" in df.iloc[0][answer_name][0].keys()
                 and "role" in df.iloc[0][answer_name][0].keys()
@@ -119,6 +120,7 @@ class DatasetProceser:
                     axis=1,
                 )
         else:
+            # print("not isinstance(df.iloc[0][answer_name][0], dict):")
             df["conversation"] = df.apply(
                 lambda row: self._preformat_chat(
                     row[question_name], row[answer_name], ""
@@ -128,7 +130,7 @@ class DatasetProceser:
         if remove_columns:
             remove_columns = [question_name, answer_name]
             df = df.drop(columns=remove_columns)
-
+        # print("_format_chat")
         df[chat_name] = df.apply(
             lambda row: self._format_chat(tokenizer, row["conversation"]),
             axis=1,
@@ -205,6 +207,8 @@ class DatasetProceser:
     @staticmethod
     def _format_chat(tokenizer: AutoTokenizer, data):
         print("\nFormat chat\n\n")
+        print(tokenizer.name_or_path)
+
         # The function tok should never generate the EOS token, however FastChat (used in vLLM) sends the full prompt as a string which might lead to incorrect tokenization of the EOS token and prompt injection. Users are encouraged to send tokens instead as described above.
         return tokenizer.apply_chat_template(
             data, tokenize=False, add_generation_prompt=False
