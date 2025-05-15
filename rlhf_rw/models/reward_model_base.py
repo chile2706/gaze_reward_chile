@@ -143,7 +143,7 @@ class MyRewardBase:
                 text_tokenized_fix,
                 sentences,
             ) = self.FP_model._compute_mapped_fixations(input_ids)
-            print("compute fixations")
+            # print("compute fixations")
         elif fixations_model_version == 2:
             (
                 fixations,
@@ -241,7 +241,7 @@ class MyRewardBase:
         ) = self.compute_fixations_cached(
             input_ids, attention_mask, remap, fixations_model_version
         )
-        
+        print("Sentence:", sentences[0])
         # get organic eyetracking
         given_sentence = sentences[0]
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
@@ -392,7 +392,7 @@ class MyRewardBase:
             fixations_attention_mask_all = self._pad_and_concat(
                 fixations_attention_mask_all
             )
-            return fixations_all, fixations_attention_mask_all, None, None, None, None
+            return fixations_all, fixations_attention_mask_all, None, None, None, sentences
         else:
             try:
                 fixations_attention_mask_all = self._pad_and_concat(
@@ -406,7 +406,7 @@ class MyRewardBase:
                 print(fixations_attention_mask_all)
 
             fixations_attention_mask_all = attention_mask
-            return None, fixations_attention_mask_all, fixations_all, None, None, sentences
+            return None, fixations_attention_mask_all, fixations_all, None, None, None
 
     @staticmethod
     def _pad_and_concat(list_of_tensors):
