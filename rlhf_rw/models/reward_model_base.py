@@ -214,7 +214,7 @@ class MyRewardBase:
         if remap:
             fixations_attention_mask = attention_mask
         
-        print()
+        given_sentence = sentences[0]
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
         if row.empty:
             print("Missing Sentence:", sentences[0])
