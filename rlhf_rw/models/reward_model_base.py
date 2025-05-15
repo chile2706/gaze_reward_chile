@@ -251,10 +251,11 @@ class MyRewardBase:
         # Parse the nested lists (stored as strings)
         fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
         fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
-
+        
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # Convert to tensors directly
-        fixations = torch.tensor(fixations, dtype=torch.float32)       # shape: [1, seq_len]
-        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long)  # shape: [1, seq_len]
+        fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
+        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
         
         del text_tokenized_fix, text_tokenized_model, sentences, given_sentence, row
         
