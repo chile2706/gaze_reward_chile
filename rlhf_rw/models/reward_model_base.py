@@ -178,7 +178,7 @@ class MyRewardBase:
         # }
         # with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation_all.jsonl", "a") as f:
         #     f.write(json.dumps(record) + "\n")
-        
+        print("Sentence from _compute_fixations:", sentences[0])
         
         return (
             fixations,

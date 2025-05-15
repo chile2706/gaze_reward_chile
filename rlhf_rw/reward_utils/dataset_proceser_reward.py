@@ -37,7 +37,7 @@ def preprocess_data_reward(
     #     "input_ids_rejected": [],
     #     "attention_mask_rejected": [],
     # }
-    print("preprocess_data_reward")
+    # print("preprocess_data_reward")
     # df = pd.DataFrame(data)
     # df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
     for chosen, rejected in zip(data[chosen_name], data[rejected_name]):
@@ -291,7 +291,7 @@ class DatasetProceserReward(DatasetProceser):
         data_split["rejected"] = data_split["rejected"].apply(
             lambda x: pd.Series(self.split_text_human_assistant(x))
         )
-        print("this is _preprocess_hhrlhf_split")
+        # print("this is _preprocess_hhrlhf_split")
         # df.to_csv("/users/0/le000422/gaze_reward_chile/data/before_preprocess_data_reward.csv", index=False)
         # filename = "/users/0/le000422/gaze_reward_chile/data/preprocess_hhrlhf_split.csv"
         # if not os.path.exists(filename):
@@ -454,7 +454,7 @@ class DatasetProceserReward(DatasetProceser):
         """
         Prepare data for the input expected by the reward trainer
         """
-        print("_preprocess_convert_chat")
+        # print("_preprocess_convert_chat")
         data_split = self.format_chat(
             data_split,
             remove_columns=False,
