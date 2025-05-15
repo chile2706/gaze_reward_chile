@@ -188,7 +188,54 @@ class MyRewardBase:
             text_tokenized_fix,
             sentences,
         )
+    
+    def _compute_organic_fixations(
+        self, input_ids, attention_mask, remap=False, fixations_model_version=1
+    ):
+        if fixations_model_version == 1:
+            (
+                fixations,
+                fixations_attention_mask,
+                mapped_fixations,
+                text_tokenized_model,
+                text_tokenized_fix,
+                sentences,
+            ) = self.FP_model._compute_mapped_fixations(input_ids)
+            # print("compute fixations")
+        elif fixations_model_version == 2:
+            (
+                fixations,
+                fixations_attention_mask,
+                mapped_fixations,
+                text_tokenized_model,
+                text_tokenized_fix,
+                sentences,
+            ) = self.FP_model._compute_mapped_fixations(input_ids, attention_mask)
+        if remap:
+            fixations_attention_mask = attention_mask
         
+        given_sentence = sentences[0]
+        row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
+        if row.empty:
+            raise ValueError("Sentence not found.")
+
+        # Parse the nested lists (stored as strings)
+        fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
+        fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
+        
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # Convert to tensors directly
+        fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
+        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
+        
+        return (
+            fixations,
+            fixations_attention_mask,
+            mapped_fixations,
+            text_tokenized_model,
+            text_tokenized_fix,
+            sentences,
+        )
 
     def compute_fixations(
         self, input_ids, attention_mask, remap=False, fixations_model_version=1
@@ -325,6 +372,7 @@ class MyRewardBase:
         )
         fixations_all, fixations_attention_mask_all = [], []
         # Iterate over each sequence in the filtered list
+        sentence_list = []
         for seq in filtered_ids:
             # Compute a hash of the sequence for caching
             if remap is True:
@@ -358,6 +406,25 @@ class MyRewardBase:
                 remap=remap,
                 fixations_model_version=fixations_model_version,
             )
+            print("### _compute_fixations ###")
+            print("fixations shape:", fixations.shape)
+            print("fixations_attention_mask shape:", fixations_attention_mask.shape)
+            (
+                fixations,
+                fixations_attention_mask,
+                mapped_fixations,
+                text_tokenized_model,
+                text_tokenized_fix,
+                sentences,
+            ) = self._compute_organic_fixations(
+                torch_seq,
+                attention_mask,
+                remap=remap,
+                fixations_model_version=fixations_model_version,
+            )
+            print("### _compute_organic_fixations ###")
+            print("fixations shape:", fixations.shape)
+            print("fixations_attention_mask shape:", fixations_attention_mask.shape)
             del text_tokenized_fix, text_tokenized_model
             if remap:
                 fixations = mapped_fixations
@@ -394,7 +461,7 @@ class MyRewardBase:
             fixations_attention_mask_all = self._pad_and_concat(
                 fixations_attention_mask_all
             )
-            return fixations_all, fixations_attention_mask_all, None, None, None, sentences
+            return fixations_all, fixations_attention_mask_all, None, None, None, sentence_list
         else:
             try:
                 fixations_attention_mask_all = self._pad_and_concat(

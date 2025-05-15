@@ -165,15 +165,7 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
                 print("##### compute_fixations #####")
                 print("fixations_normalized shape:", fixations_normalized.shape)
                 print("fixations_attention shape:", fixations_attention.shape)
-                fixations_normalized, fixations_attention = self.compute_organic_fixations(
-                    input_ids,
-                    attention_mask,
-                    remap=False,
-                    fixations_model_version=self.fixations_model_version,
-                )
-                print("##### compute_organic_fixations #####")
-                print("fixations_normalized shape:", fixations_normalized.shape)
-                print("fixations_attention shape:", fixations_attention.shape)
+
                 # filename = "/users/0/le000422/gaze_reward_chile/data/normalized_fixations.jsonl"
                 # for i in range(input_ids.shape[0]):
                 #     record = {
