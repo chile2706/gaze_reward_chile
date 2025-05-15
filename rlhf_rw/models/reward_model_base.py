@@ -243,6 +243,7 @@ class MyRewardBase:
         )
         # print("Sentence:", sentences[0])
         # get organic eyetracking
+        print("len sentences:", len(sentences))
         given_sentence = sentences[0]
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
         if row.empty:
