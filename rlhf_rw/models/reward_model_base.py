@@ -178,7 +178,7 @@ class MyRewardBase:
         # }
         # with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation_all.jsonl", "a") as f:
         #     f.write(json.dumps(record) + "\n")
-        print("Sentence from _compute_fixations:", sentences[0])
+        # print("Sentence from _compute_fixations:", sentences[0])
         
         return (
             fixations,
@@ -241,7 +241,7 @@ class MyRewardBase:
         ) = self.compute_fixations_cached(
             input_ids, attention_mask, remap, fixations_model_version
         )
-        print("Sentence:", sentences[0])
+        # print("Sentence:", sentences[0])
         # get organic eyetracking
         given_sentence = sentences[0]
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
