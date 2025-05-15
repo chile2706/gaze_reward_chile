@@ -38,10 +38,10 @@ from eyetrackpy.data_generator.fixations_predictor_trained_2.fixations_predictor
 from typing import (
     TypeVar,
 )
-
+import pandas as pd
 T = TypeVar("T", bound="Module")
 import re
-
+import ast
 
 class MyRewardBase:
     def __init__(
@@ -56,6 +56,7 @@ class MyRewardBase:
         self.memory_storage = LMDBStorage(
             db_path="/users/0/le000422/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
+        self.organic_eyetracking = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/fixations_organic_mapping.csv")
 
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
@@ -214,9 +215,6 @@ class MyRewardBase:
         ) = self.compute_fixations_cached(
             input_ids, attention_mask, remap, fixations_model_version
         )
-        # print(f"fixations:\n{fixations}\n")
-        # print(f"fixations_attention_mask:\n{fixations_attention_mask}\n")
-        # print(f"mapped_fixations:\n{mapped_fixations}\n")
         
         
         del text_tokenized_fix, text_tokenized_model, sentences
@@ -229,7 +227,46 @@ class MyRewardBase:
             fixations_model_version,
         )
         return fixations_normalized, fixations_attention_mask
+    
+    def compute_organic_fixations(
+        self, input_ids, attention_mask, remap=False, fixations_model_version=1
+    ):
+        (
+            fixations,
+            fixations_attention_mask,
+            mapped_fixations,
+            text_tokenized_model,
+            text_tokenized_fix,
+            sentences,
+        ) = self.compute_fixations_cached(
+            input_ids, attention_mask, remap, fixations_model_version
+        )
+        
+        # get organic eyetracking
+        given_sentence = sentences[0]
+        row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
+        if row.empty:
+            raise ValueError("Sentence not found.")
 
+        # Parse the nested lists (stored as strings)
+        fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
+        fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
+
+        # Convert to tensors directly
+        fixations = torch.tensor(fixations, dtype=torch.float32)       # shape: [1, seq_len]
+        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long)  # shape: [1, seq_len]
+        
+        del text_tokenized_fix, text_tokenized_model, sentences, given_sentence, row
+        
+        fixations_normalized, fixations_attention_mask = self.process_fixations(
+            fixations,
+            fixations_attention_mask,
+            mapped_fixations,
+            remap,
+            fixations_model_version,
+        )
+        return fixations_normalized, fixations_attention_mask
+    
     def process_fixations(
         self,
         fixations,

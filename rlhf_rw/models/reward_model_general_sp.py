@@ -153,16 +153,21 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
             inputs_embeds = self.model.embed_tokens(input_ids.to("cuda"))
             attention_mask = attention_mask.to("cuda")
             if self.use_softprompt:
-                print("MyRewardConcatenate.forward")
+                # print("MyRewardConcatenate.forward")
                 # TODO: change code so the fixations use the chached code
                 # mapped_fixations = self.forward_cached(input_ids)
-                fixations_normalized, fixations_attention = self.compute_fixations(
+                # fixations_normalized, fixations_attention = self.compute_fixations(
+                #     input_ids,
+                #     attention_mask,
+                #     remap=False,
+                #     fixations_model_version=self.fixations_model_version,
+                # )
+                fixations_normalized, fixations_attention = self.compute_organic_fixations(
                     input_ids,
                     attention_mask,
                     remap=False,
                     fixations_model_version=self.fixations_model_version,
                 )
-                
                 # filename = "/users/0/le000422/gaze_reward_chile/data/normalized_fixations.jsonl"
                 # for i in range(input_ids.shape[0]):
                 #     record = {
