@@ -356,7 +356,7 @@ class MyRewardBase:
                 remap=remap,
                 fixations_model_version=fixations_model_version,
             )
-            del text_tokenized_fix, text_tokenized_model, sentences
+            del text_tokenized_fix, text_tokenized_model
             if remap:
                 fixations = mapped_fixations
                 fixations_attention_mask = attention_mask
@@ -406,7 +406,7 @@ class MyRewardBase:
                 print(fixations_attention_mask_all)
 
             fixations_attention_mask_all = attention_mask
-            return None, fixations_attention_mask_all, fixations_all, None, None, None
+            return None, fixations_attention_mask_all, fixations_all, None, None, sentences
 
     @staticmethod
     def _pad_and_concat(list_of_tensors):
