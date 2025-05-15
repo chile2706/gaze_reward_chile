@@ -214,9 +214,10 @@ class MyRewardBase:
         if remap:
             fixations_attention_mask = attention_mask
         
-        given_sentence = sentences[0]
+        print()
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
         if row.empty:
+            print("Missing Sentence:", sentences[0])
             raise ValueError("Sentence not found.")
 
         # Parse the nested lists (stored as strings)
