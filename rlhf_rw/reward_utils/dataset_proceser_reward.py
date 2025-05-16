@@ -153,7 +153,7 @@ class DatasetProceserReward(DatasetProceser):
     ):
         if dataset_name == "our_data":
             print("\nLoad our data\n")
-            data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli.csv")
+            data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_912.csv")
             # data = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/processed_stimuli_100.csv")
             print(data.shape)
         else:

@@ -410,19 +410,19 @@ class MyRewardBase:
             # print("### _compute_fixations ###")
             # print("fixations shape:", fixations.shape)
             # print("fixations_attention_mask shape:", fixations_attention_mask.shape)
-            (
-                fixations,
-                fixations_attention_mask,
-                mapped_fixations,
-                text_tokenized_model,
-                text_tokenized_fix,
-                sentences,
-            ) = self._compute_organic_fixations(
-                torch_seq,
-                attention_mask,
-                remap=remap,
-                fixations_model_version=fixations_model_version,
-            )
+            # (
+            #     fixations,
+            #     fixations_attention_mask,
+            #     mapped_fixations,
+            #     text_tokenized_model,
+            #     text_tokenized_fix,
+            #     sentences,
+            # ) = self._compute_organic_fixations(
+            #     torch_seq,
+            #     attention_mask,
+            #     remap=remap,
+            #     fixations_model_version=fixations_model_version,
+            # )
             # print("### _compute_organic_fixations ###")
             # print("fixations shape:", fixations.shape)
             # print("fixations_attention_mask shape:", fixations_attention_mask.shape)
