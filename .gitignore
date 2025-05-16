@@ -177,3 +177,4 @@ rlhf_rw/logs/
 models_save/
 rlhf_rw/buffer_train.lmdb/
 data/normalized_fixations.jsonl
+rlhf_rw/oasst1_train_job.sh
