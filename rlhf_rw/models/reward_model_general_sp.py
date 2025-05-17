@@ -162,24 +162,7 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
                     remap=False,
                     fixations_model_version=self.fixations_model_version,
                 )
-                # print("##### compute_fixations #####")
-                # print("fixations_normalized shape:", fixations_normalized.shape)
-                # print("fixations_attention shape:", fixations_attention.shape)
-
-                # filename = "/users/0/le000422/gaze_reward_chile/data/normalized_fixations.jsonl"
-                # for i in range(input_ids.shape[0]):
-                #     record = {
-                #         "input_ids": input_ids[i].tolist(),
-                #         # "attention_mask": attention_mask[i].tolist(),
-                #         "inputs_embeds": inputs_embeds[i].detach().cpu().numpy().tolist(),
-                #         "fixations_normalized": fixations_normalized[i].detach().cpu().numpy().tolist(),
-                #         "fixations_attention": fixations_attention[i].detach().cpu().numpy().tolist(),
-                #     }
-                #     with open(filename, "w") as f:
-                #         f.write(json.dumps(record) + "\n")
                     
-                
-                
                 
                 # concat  fixations
                 concat_tokens_embed = self.model.embed_tokens(

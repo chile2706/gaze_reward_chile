@@ -56,7 +56,7 @@ class MyRewardBase:
         self.memory_storage = LMDBStorage(
             db_path="/users/0/le000422/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
-        self.organic_eyetracking = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/fixations_organic_mapping.csv")
+        # self.organic_eyetracking = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/fixations_organic_mapping.csv")
 
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
@@ -189,55 +189,6 @@ class MyRewardBase:
             sentences,
         )
     
-    def _compute_organic_fixations(
-        self, input_ids, attention_mask, remap=False, fixations_model_version=1
-    ):
-        if fixations_model_version == 1:
-            (
-                fixations,
-                fixations_attention_mask,
-                mapped_fixations,
-                text_tokenized_model,
-                text_tokenized_fix,
-                sentences,
-            ) = self.FP_model._compute_mapped_fixations(input_ids)
-            # print("compute fixations")
-        elif fixations_model_version == 2:
-            (
-                fixations,
-                fixations_attention_mask,
-                mapped_fixations,
-                text_tokenized_model,
-                text_tokenized_fix,
-                sentences,
-            ) = self.FP_model._compute_mapped_fixations(input_ids, attention_mask)
-        if remap:
-            fixations_attention_mask = attention_mask
-        
-        given_sentence = sentences[0]
-        row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
-        if row.empty:
-            print("Missing Sentence:", sentences[0])
-            raise ValueError("Sentence not found.")
-
-        # Parse the nested lists (stored as strings)
-        fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
-        fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
-        
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        # Convert to tensors directly
-        fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
-        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
-        
-        return (
-            fixations,
-            fixations_attention_mask,
-            mapped_fixations,
-            text_tokenized_model,
-            text_tokenized_fix,
-            sentences,
-        )
-
     def compute_fixations(
         self, input_ids, attention_mask, remap=False, fixations_model_version=1
     ):
@@ -266,47 +217,6 @@ class MyRewardBase:
         
         
         del text_tokenized_fix, text_tokenized_model, sentences
-        
-        fixations_normalized, fixations_attention_mask = self.process_fixations(
-            fixations,
-            fixations_attention_mask,
-            mapped_fixations,
-            remap,
-            fixations_model_version,
-        )
-        return fixations_normalized, fixations_attention_mask
-    
-    def compute_organic_fixations(
-        self, input_ids, attention_mask, remap=False, fixations_model_version=1
-    ):
-        (
-            fixations,
-            fixations_attention_mask,
-            mapped_fixations,
-            text_tokenized_model,
-            text_tokenized_fix,
-            sentences,
-        ) = self.compute_fixations_cached(
-            input_ids, attention_mask, remap, fixations_model_version
-        )
-        # print("Sentence:", sentences[0])
-        # get organic eyetracking
-        print("len sentences:", len(sentences))
-        given_sentence = sentences[0]
-        row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
-        if row.empty:
-            raise ValueError("Sentence not found.")
-
-        # Parse the nested lists (stored as strings)
-        fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
-        fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
-        
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        # Convert to tensors directly
-        fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
-        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
-        
-        del text_tokenized_fix, text_tokenized_model, sentences, given_sentence, row
         
         fixations_normalized, fixations_attention_mask = self.process_fixations(
             fixations,
