@@ -110,6 +110,6 @@ tokenizers==0.19.1
 torch==2.2.2
 torchviz==0.0.2
 tqdm==4.67.1
-transformers==4.43.1
+transformers==4.43.4
 trl==0.9.6
 
