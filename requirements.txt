@@ -85,7 +85,7 @@ pytz==2024.1
 PyYAML==6.0.1
 regex==2023.12.25
 requests==2.32.3
-rewardbench==0.1.2
+rewardbench
 rich==13.7.1
 ruff==0.4.1
 safetensors==0.4.2
