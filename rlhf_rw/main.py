@@ -17,6 +17,8 @@ from rlhf_rw.trainers.reward_trainer_general import (
     RewardTrainerConstructorGeneral,
 )
 from transformers import set_seed
+import transformers
+print(transformers.__version__)
 
 import os
 
