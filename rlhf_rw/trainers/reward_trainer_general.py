@@ -361,9 +361,10 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
         training_args = {
             "output_dir": save_folder,
             "save_strategy": "steps",
-            "save_steps": self.logging_steps,
-            "metric_for_best_model": "accuracy",
-            "save_total_limit": 1,
+            # "save_steps": self.logging_steps,
+            "save_steps": 100,
+            "metric_for_best_model": "loss",
+            "save_total_limit": 5,
             "load_best_model_at_end": True,
             "logging_dir": "./logs",
             "report_to": "wandb",
@@ -371,7 +372,7 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             "gradient_accumulation_steps": self.gradient_acum_steps,
             "gradient_checkpointing": self.gradient_checkpointing,
             "evaluation_strategy": "steps",
-            "logging_steps": self.logging_steps,
+            "logging_steps": 100,
             "num_train_epochs": self.train_epochs,
             "run_name": self.model_name_log,
             "max_length": 8000,
@@ -434,7 +435,7 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             "args": training_args,
             "tokenizer": self.tokenizer,
             "train_dataset": self.train_dataset,
-            "eval_dataset": self.eval_dataset,
+            "eval_dataset": self.eval_dataset.shuffle(seed=0).select(range(500)),
             "peft_config": self.peft_config,
         }
 
