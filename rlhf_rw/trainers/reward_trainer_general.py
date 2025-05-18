@@ -312,31 +312,59 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             load_local_folder_name=folder_name,
         )
         self.tokenizer = model.tokenizer
-        # if self.dataset_name == "allenai/reward-bench":
-        print(f"\n{self.dataset_name}\n")
-        self.load_dataset_rewardbench(
-            max_length=self.max_length, max_tokens=self.max_tokens, mode=mode
-        )
-        if mode == "all":
-            results = {}
-            rb_all_data = self.test_dataset
-            # for subset_name, subset_data in rb_all_data.items():
-            #     self.test_dataset = subset_data
-            #     self.set_trainer_eval()
-            #     results[subset_name] = self.trainer.evaluate()
-            self.set_trainer_eval()
-            results = self.trainer.evaluate()
+        records = []
+        if self.dataset_name == "allenai/reward-bench":
+            self.load_dataset_rewardbench(
+                max_length=self.max_length, max_tokens=self.max_tokens, mode=mode
+            )
+            if mode == "all":
+                results = {}
+                rb_all_data = self.test_dataset
+                for subset_name, subset_data in rb_all_data.items():
+                    self.test_dataset = subset_data
+                    self.set_trainer_eval()
+                    results[subset_name] = self.trainer.evaluate()
+            else:
+                self.test_dataset = rb_all_data[mode]
+                self.set_trainer_eval()
+                results = self.trainer.evaluate()
         else:
-            self.test_dataset = rb_all_data[mode]
+            self.load_dataset(
+                split=self.dataset_split, eval_mode=True, max_length=self.max_length
+            )
             self.set_trainer_eval()
-            results = self.trainer.evaluate()
-        # else:
-        #     self.load_dataset(
-        #         split=self.dataset_split, eval_mode=True, max_length=self.max_length
-        #     )
-        #     self.set_trainer_eval()
-        #     results = self.trainer.evaluate()
-        return results
+            # Predict on the test set
+            predictions_output = self.trainer.predict(self.test_dataset)
+            logits = predictions_output.predictions
+            labels = predictions_output.label_ids
+            if "input_ids_chosen" in self.test_dataset.features and "input_ids_rejected" in self.test_dataset.features:
+                chosen_texts = self.tokenizer.batch_decode(
+                    self.test_dataset["input_ids_chosen"], skip_special_tokens=True
+                )
+                rejected_texts = self.tokenizer.batch_decode(
+                    self.test_dataset["input_ids_rejected"], skip_special_tokens=True
+                )
+            else:
+                raise ValueError("The dataset must include 'input_ids_chosen' and 'input_ids_rejected'.")
+            
+            # Prepare records
+            for i, (logit_pair, label) in enumerate(zip(logits, labels)):
+                score_chosen = float(logit_pair[0])
+                score_rejected = float(logit_pair[1])
+                predicted_label = int(score_chosen > score_rejected)
+                correct = int(predicted_label == label)
+
+                records.append({
+                    "chosen_text": chosen_texts[i],
+                    "rejected_text": rejected_texts[i],
+                    "score_chosen": score_chosen,
+                    "score_rejected": score_rejected,
+                    "label": int(label),
+                    "predicted_label": predicted_label,
+                    "correct": correct,
+                })
+            # results = self.trainer.evaluate()
+        return records
 
     def eval_model_v2(self):
         # self.dataset_procesor.preprocess_data_reward(
@@ -344,8 +372,44 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
         # )
         # self.test_dataset = self.dataset_procesor.data["test"]
         self.set_trainer_eval()
-        results = self.trainer.evaluate()
+        results = self.trainer.evaluate()      
         return results
+
+    def eval_model_v3(self):
+
+        self.set_trainer_eval()
+        # Predict on the test set
+        predictions_output = self.trainer.predict(self.test_dataset)
+        logits = predictions_output.predictions
+        labels = predictions_output.label_ids
+        if "input_ids_chosen" in self.test_dataset.features and "input_ids_rejected" in self.test_dataset.features:
+            chosen_texts = self.tokenizer.batch_decode(
+                self.test_dataset["input_ids_chosen"], skip_special_tokens=True
+            )
+            rejected_texts = self.tokenizer.batch_decode(
+                self.test_dataset["input_ids_rejected"], skip_special_tokens=True
+            )
+        else:
+            raise ValueError("The dataset must include 'input_ids_chosen' and 'input_ids_rejected'.")
+        records = []
+        # Prepare records
+        for i, (logit_pair, label) in enumerate(zip(logits, labels)):
+            score_chosen = float(logit_pair[0])
+            score_rejected = float(logit_pair[1])
+            predicted_label = int(score_chosen > score_rejected)
+            correct = int(predicted_label == label)
+
+            records.append({
+                "chosen_text": chosen_texts[i],
+                "rejected_text": rejected_texts[i],
+                "score_chosen": score_chosen,
+                "score_rejected": score_rejected,
+                "label": int(label),
+                "predicted_label": predicted_label,
+                "correct": correct,
+            })
+        # results = self.trainer.evaluate()
+        return records   
 
     def config_lora(self, lora_r=8, lora_alpha=32, lora_dropout=0.1):
         self.peft_config = LoraConfig(

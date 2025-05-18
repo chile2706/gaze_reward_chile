@@ -159,6 +159,8 @@ class DatasetProceserReward(DatasetProceser):
         else:
             if split != "":
                 data = load_dataset(dataset_name, split=split)
+            if 'Anthropic' in dataset_name:
+                data = load_dataset(dataset_name, data_dir='helpful-base') 
             else:
                 data = load_dataset(dataset_name)
         return cls(

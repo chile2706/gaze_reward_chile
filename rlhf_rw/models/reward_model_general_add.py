@@ -130,12 +130,12 @@ def create_dynamic_class_RewardAdd(base_class=LlamaForSequenceClassification):
                 `config.num_labels > 1` a classification loss is computed (Cross-Entropy).
             """
             # mapped_fixations = self.FP_model(input_ids)
-            fixations_normalized, fixations_attention = self.compute_fixations(
-                input_ids,
-                attention_mask,
-                remap=True,
-                fixations_model_version=self.fixations_model_version,
-            )
+            # fixations_normalized, fixations_attention = self.compute_fixations(
+            #     input_ids,
+            #     attention_mask,
+            #     remap=True,
+            #     fixations_model_version=self.fixations_model_version,
+            # )
 
             # we compute the embedding and we just add the fixations to the embedding
             inputs_embeds = self.model.embed_tokens(input_ids.to("cuda"))

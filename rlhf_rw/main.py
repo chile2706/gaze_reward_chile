@@ -371,6 +371,11 @@ if __name__ == "__main__":
         with open(folder_name_unique_path + "/results_dataset_test.json", "w") as f:
             json.dump(results, f, indent=4)
         print("results_dataset_test", results)
+        records = reward_trainer.eval_model_v3()
+        with open(folder_name_unique_path + f"/results_test_set_predictions.json", "w", encoding="utf-8") as f:
+            for record in records:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        print("Finished saving test set predictions")
 
 
     else:
@@ -393,7 +398,9 @@ if __name__ == "__main__":
             fp_dropout,
         )
         print(f"\nFolder path is: {folder_name_path_eval}\n")
-        results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
-        with open(folder_name_path_eval + f"/results_dataset_test_allenai_reward_benchmark.json", "w") as f:
-            json.dump(results, f, indent=4)
+        records = reward_trainer.eval_model(folder_name=folder_name_path_eval)
+        with open(folder_name_path_eval + f"/results_test_set_predictions.json", "w", encoding="utf-8") as f:
+            for record in records:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        print("Finished saving test set predictions")
 
