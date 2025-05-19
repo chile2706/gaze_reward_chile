@@ -363,8 +363,8 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
                     "predicted_label": predicted_label,
                     "correct": correct,
                 })
-            # results = self.trainer.evaluate()
-        return records
+            results = self.trainer.evaluate()
+        return results, records
 
     def eval_model_v2(self):
         # self.dataset_procesor.preprocess_data_reward(

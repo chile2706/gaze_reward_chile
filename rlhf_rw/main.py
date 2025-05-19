@@ -398,9 +398,11 @@ if __name__ == "__main__":
             fp_dropout,
         )
         print(f"\nFolder path is: {folder_name_path_eval}\n")
-        records = reward_trainer.eval_model(folder_name=folder_name_path_eval)
+        results, records = reward_trainer.eval_model(folder_name=folder_name_path_eval)
         with open(folder_name_path_eval + f"/OASST_results_test_set_predictions.json", "w", encoding="utf-8") as f:
             for record in records:
                 f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        with open(folder_name_path_eval + "/OASST_results_dataset_test.json", "w") as f:
+            json.dump(results, f, indent=4)
         print("Finished saving test set predictions")
 

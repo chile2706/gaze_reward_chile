@@ -54,7 +54,7 @@ class MyRewardBase:
         self.features_used = features_used
         self.model_name = model_name
         self.memory_storage = LMDBStorage(
-            db_path="/users/0/le000422/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
+            db_path="/content/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
         # self.organic_eyetracking = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/fixations_organic_mapping.csv")
 
