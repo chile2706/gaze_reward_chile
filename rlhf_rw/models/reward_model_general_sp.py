@@ -213,6 +213,7 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
                 # Free memory of unused tensors
                 del separator_attention_mask, fixations_attention
             else:
+                print("skip")
                 inputs_embeds = inputs_embeds.float()
             # new_emebding = embedings + self.fixations_embedding_projector(fixations)
 

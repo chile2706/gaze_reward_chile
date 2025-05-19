@@ -168,16 +168,16 @@ class MyRewardBase:
         # print("  type:", type(fixations))
         # print("  shape:", fixations.shape)
         # print(mapped_fixations)
-        record = {
-            "sentences": sentences,
-            "input_ids": input_ids.cpu().numpy().tolist(),
-            "fixations": fixations.cpu().numpy().tolist(),
-            # "mapped_fixations": mapped_fixations.cpu().numpy().tolist(),
-            "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
+        # record = {
+        #     "sentences": sentences,
+        #     "input_ids": input_ids.cpu().numpy().tolist(),
+        #     "fixations": fixations.cpu().numpy().tolist(),
+        #     # "mapped_fixations": mapped_fixations.cpu().numpy().tolist(),
+        #     "attention_mask": fixations_attention_mask.cpu().numpy().tolist(),
                         
-        }
-        with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation_all.jsonl", "a") as f:
-            f.write(json.dumps(record) + "\n")
+        # }
+        # with open("/users/0/le000422/gaze_reward_chile/data/myRewardBase_compute_fixation_all.jsonl", "a") as f:
+        #     f.write(json.dumps(record) + "\n")
         # print("Sentence from _compute_fixations:", sentences[0])
         
         return (
