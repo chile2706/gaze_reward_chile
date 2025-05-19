@@ -250,6 +250,7 @@ class MyRewardBase:
             # with second fixator you dont need to unsqueeze
             fixations = fixations.unsqueeze(2)
         # project to embedding size dimension
+        print("fixations shape:", fixations.shape)
         fixations_projected = self.fixations_embedding_projector(fixations)
         # fixations = fixations.detach()
         # del fixations
