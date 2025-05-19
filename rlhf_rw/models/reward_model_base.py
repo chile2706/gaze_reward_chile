@@ -225,6 +225,7 @@ class MyRewardBase:
             remap,
             fixations_model_version,
         )
+        print("fixations_normalized.shape", fixations_normalized.shape)
         return fixations_normalized, fixations_attention_mask
     
     def process_fixations(
