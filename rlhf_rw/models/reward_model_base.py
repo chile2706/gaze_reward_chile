@@ -26,6 +26,8 @@ path = str(
 )
 sys.path.append(path)
 from transformers import AutoTokenizer
+from transformers import PreTrainedTokenizerFast
+
 import torch
 import torch.nn as nn
 from eyetrackpy.data_generator.fixations_predictor_trained_1.fixations_predictor_model_1 import (
@@ -60,7 +62,8 @@ class MyRewardBase:
 
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
-            tokenizer = AutoTokenizer.from_pretrained(load_local_folder_name)
+            # tokenizer = AutoTokenizer.from_pretrained(load_local_folder_name)
+            tokenizer = PreTrainedTokenizerFast.from_pretrained(load_local_folder_name)
         else:
             print("tokenizer = AutoTokenizer.from_pretrained(")
             tokenizer = AutoTokenizer.from_pretrained(
