@@ -167,77 +167,77 @@ def create_dynamic_class_RewardConcatenate(base_class=LlamaForSequenceClassifica
                 concat_tokens_embed = self.model.embed_tokens(
                     torch.tensor(self.concat_tokens_ids).to("cuda")
                 )
-                batch_size = fixations_normalized.size(0)
-                d_model = concat_tokens_embed.size(-1)
-                start_embed = concat_tokens_embed[0].unsqueeze(0).unsqueeze(0)  # [1,1,d_model]
-                end_embed = concat_tokens_embed[1].unsqueeze(0).unsqueeze(0)
-                start_embed_batch = start_embed.expand(batch_size, 1, d_model)
-                end_embed_batch = end_embed.expand(batch_size, 1, d_model)
-                separator_mask = torch.ones(batch_size, 1, device="cuda", dtype=attention_mask.dtype)
+                # batch_size = fixations_normalized.size(0)
+                # d_model = concat_tokens_embed.size(-1)
+                # start_embed = concat_tokens_embed[0].unsqueeze(0).unsqueeze(0)  # [1,1,d_model]
+                # end_embed = concat_tokens_embed[1].unsqueeze(0).unsqueeze(0)
+                # start_embed_batch = start_embed.expand(batch_size, 1, d_model)
+                # end_embed_batch = end_embed.expand(batch_size, 1, d_model)
+                # separator_mask = torch.ones(batch_size, 1, device="cuda", dtype=attention_mask.dtype)
                 
-                # concat_tokens_embed_start = (
-                #     concat_tokens_embed[0]
-                #     .unsqueeze(0)
-                #     .unsqueeze(0)
-                #     .expand(fixations_normalized.shape[0], -1, -1)
-                # )
-                # concat_tokens_embed_end = (
-                #     concat_tokens_embed[1]
-                #     .unsqueeze(0)
-                #     .unsqueeze(0)
-                #     .expand(fixations_normalized.shape[0], -1, -1)
-                # )
-                # separator_attention_mask = (
-                #     torch.tensor([1])
-                #     .expand(fixations_normalized.shape[0], -1)
-                #     .to("cuda")
-                # )
-                # --- Concatenate everything ---
-                inputs_embeds = torch.cat(
-                    [start_embed_batch, fixations_normalized, end_embed_batch, inputs_embeds],
-                    dim=1,
+                concat_tokens_embed_start = (
+                    concat_tokens_embed[0]
+                    .unsqueeze(0)
+                    .unsqueeze(0)
+                    .expand(fixations_normalized.shape[0], -1, -1)
                 )
-                attention_mask = torch.cat(
-                    [separator_mask, fixations_attention, separator_mask, attention_mask],
-                    dim=1,
+                concat_tokens_embed_end = (
+                    concat_tokens_embed[1]
+                    .unsqueeze(0)
+                    .unsqueeze(0)
+                    .expand(fixations_normalized.shape[0], -1, -1)
                 )
-                # Free memory
-                del (
-                    fixations_normalized,
-                    fixations_attention,
-                    concat_tokens_embed,
-                    start_embed,
-                    end_embed,
-                    start_embed_batch,
-                    end_embed_batch,
-                    separator_mask,
+                separator_attention_mask = (
+                    torch.tensor([1])
+                    .expand(fixations_normalized.shape[0], -1)
+                    .to("cuda")
                 )
+                # # --- Concatenate everything ---
                 # inputs_embeds = torch.cat(
-                #     (
-                #         concat_tokens_embed_start,
-                #         fixations_normalized,
-                #         concat_tokens_embed_end,
-                #         inputs_embeds,
-                #     ),
+                #     [start_embed_batch, fixations_normalized, end_embed_batch, inputs_embeds],
                 #     dim=1,
-                # )
-                # Delete unnecessary tensors to free up memory
-                # del (
-                #     concat_tokens_embed_start,
-                #     concat_tokens_embed_end,
-                #     fixations_normalized,
                 # )
                 # attention_mask = torch.cat(
-                #     (
-                #         separator_attention_mask,
-                #         fixations_attention,
-                #         separator_attention_mask,
-                #         attention_mask,
-                #     ),
+                #     [separator_mask, fixations_attention, separator_mask, attention_mask],
                 #     dim=1,
                 # )
-                # # Free memory of unused tensors
-                # del separator_attention_mask, fixations_attention
+                # # Free memory
+                # del (
+                #     fixations_normalized,
+                #     fixations_attention,
+                #     concat_tokens_embed,
+                #     start_embed,
+                #     end_embed,
+                #     start_embed_batch,
+                #     end_embed_batch,
+                #     separator_mask,
+                # )
+                inputs_embeds = torch.cat(
+                    (
+                        concat_tokens_embed_start,
+                        fixations_normalized,
+                        concat_tokens_embed_end,
+                        inputs_embeds,
+                    ),
+                    dim=1,
+                )
+                # Delete unnecessary tensors to free up memory
+                del (
+                    concat_tokens_embed_start,
+                    concat_tokens_embed_end,
+                    fixations_normalized,
+                )
+                attention_mask = torch.cat(
+                    (
+                        separator_attention_mask,
+                        fixations_attention,
+                        separator_attention_mask,
+                        attention_mask,
+                    ),
+                    dim=1,
+                )
+                # Free memory of unused tensors
+                del separator_attention_mask, fixations_attention
             else:
                 print("skip")
                 inputs_embeds = inputs_embeds.float()
