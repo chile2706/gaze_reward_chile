@@ -294,8 +294,8 @@ if __name__ == "__main__":
         use_quantization=use_quantization,
         concat=concat,
         use_softprompt=use_softprompt,
-        dataset_name=dataset_name,
-        # dataset_name= "allenai/reward-bench",
+        # dataset_name=dataset_name,
+        dataset_name= "OpenAssistant/oasst1",
         dataset_split=dataset_split,
         fold=fold,
         subsample_percentage=subsample_percentage,
@@ -399,7 +399,7 @@ if __name__ == "__main__":
         )
         print(f"\nFolder path is: {folder_name_path_eval}\n")
         records = reward_trainer.eval_model(folder_name=folder_name_path_eval)
-        with open(folder_name_path_eval + f"/results_test_set_predictions.json", "w", encoding="utf-8") as f:
+        with open(folder_name_path_eval + f"/OASST_results_test_set_predictions.json", "w", encoding="utf-8") as f:
             for record in records:
                 f.write(json.dumps(record, ensure_ascii=False) + "\n")
         print("Finished saving test set predictions")
