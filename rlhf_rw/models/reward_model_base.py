@@ -250,7 +250,10 @@ class MyRewardBase:
             # with second fixator you dont need to unsqueeze
             fixations = fixations.unsqueeze(2)
         # project to embedding size dimension
-        print("fixations shape:", fixations.shape)
+        text = f"{fixations.shape}"
+        with open("/users/0/le000422/gaze_reward_chile/data/fixations_shape.jsonl", "w") as f:
+            f.write(text)
+        
         fixations_projected = self.fixations_embedding_projector(fixations)
         # fixations = fixations.detach()
         # del fixations
