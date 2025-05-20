@@ -499,7 +499,8 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             "args": training_args,
             "tokenizer": self.tokenizer,
             "train_dataset": self.train_dataset,
-            "eval_dataset": self.eval_dataset.shuffle(seed=0).select(range(500)),
+            # "eval_dataset": self.eval_dataset.shuffle(seed=0).select(range(500)),
+            "eval_dataset": self.eval_dataset,
             "peft_config": self.peft_config,
         }
 
