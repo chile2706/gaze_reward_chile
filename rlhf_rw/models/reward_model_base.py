@@ -223,7 +223,7 @@ class MyRewardBase:
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
         if row.empty:
             print("Missing Sentence:", sentences[0])
-            # raise ValueError("Sentence not found.")
+            raise ValueError("Sentence not found.")
         else: 
             # Parse the nested lists (stored as strings)
             fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
