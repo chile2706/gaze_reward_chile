@@ -399,12 +399,15 @@ if __name__ == "__main__":
             fixations_model_version,
             fp_dropout,
         )
+        
+        
         print(f"\nFolder path is: {folder_name_path_eval}\n")
+        folder_name_path_eval = "/users/0/le000422/gaze_reward_chile/models_save/OASST-et/OASST-et"
         results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
         # with open(folder_name_path_eval + f"/hh_results_test_set_predictions.json", "w", encoding="utf-8") as f:
         #     for record in records:
         #         f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        with open(folder_name_path_eval + "/hh_results_dataset_test.json", "w") as f:
+        with open(folder_name_path_eval + "/rewardbench_results_dataset_test.json", "w") as f:
             json.dump(results, f, indent=4)
         print("Finished saving test set predictions")
 
