@@ -291,6 +291,7 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             self.trainer.train()
 
     def eval_model(self, folder_name, mode="all"):
+        print(folder_name)
         if self.use_quantization:
             print("Config quantization")
             self.bnb_config = self.config_quantization()
