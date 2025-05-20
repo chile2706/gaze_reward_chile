@@ -294,10 +294,10 @@ if __name__ == "__main__":
         use_quantization=use_quantization,
         concat=concat,
         use_softprompt=use_softprompt,
-        # dataset_name=dataset_name,
+        dataset_name=dataset_name,
         # dataset_name= "Anthropic/hh-rlhf",
         # dataset_name="OpenAssistant/oasst1",
-        dataset_name="nvidia/HelpSteer2",
+        # dataset_name="nvidia/HelpSteer2",
         dataset_split=dataset_split,
         fold=fold,
         subsample_percentage=subsample_percentage,
@@ -373,11 +373,11 @@ if __name__ == "__main__":
         with open(folder_name_unique_path + "/results_dataset_test.json", "w") as f:
             json.dump(results, f, indent=4)
         print("results_dataset_test", results)
-        records = reward_trainer.eval_model_v3()
-        with open(folder_name_unique_path + f"/results_test_set_predictions.json", "w", encoding="utf-8") as f:
-            for record in records:
-                f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        print("Finished saving test set predictions")
+        # records = reward_trainer.eval_model_v3()
+        # with open(folder_name_unique_path + f"/results_test_set_predictions.json", "w", encoding="utf-8") as f:
+        #     for record in records:
+        #         f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        # print("Finished saving test set predictions")
 
 
     else:
