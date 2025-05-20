@@ -334,37 +334,37 @@ class RewardTrainerConstructorGeneral(RewardTrainerConstructor):
             )
             self.set_trainer_eval()
             # Predict on the test set
-            predictions_output = self.trainer.predict(self.test_dataset)
-            logits = predictions_output.predictions
-            labels = predictions_output.label_ids
-            if "input_ids_chosen" in self.test_dataset.features and "input_ids_rejected" in self.test_dataset.features:
-                chosen_texts = self.tokenizer.batch_decode(
-                    self.test_dataset["input_ids_chosen"], skip_special_tokens=True
-                )
-                rejected_texts = self.tokenizer.batch_decode(
-                    self.test_dataset["input_ids_rejected"], skip_special_tokens=True
-                )
-            else:
-                raise ValueError("The dataset must include 'input_ids_chosen' and 'input_ids_rejected'.")
+            # predictions_output = self.trainer.predict(self.test_dataset)
+            # logits = predictions_output.predictions
+            # labels = predictions_output.label_ids
+            # if "input_ids_chosen" in self.test_dataset.features and "input_ids_rejected" in self.test_dataset.features:
+            #     chosen_texts = self.tokenizer.batch_decode(
+            #         self.test_dataset["input_ids_chosen"], skip_special_tokens=True
+            #     )
+            #     rejected_texts = self.tokenizer.batch_decode(
+            #         self.test_dataset["input_ids_rejected"], skip_special_tokens=True
+            #     )
+            # else:
+            #     raise ValueError("The dataset must include 'input_ids_chosen' and 'input_ids_rejected'.")
             
-            # Prepare records
-            for i, (logit_pair, label) in enumerate(zip(logits, labels)):
-                score_chosen = float(logit_pair[0])
-                score_rejected = float(logit_pair[1])
-                predicted_label = int(score_chosen > score_rejected)
-                correct = int(predicted_label == label)
+            # # Prepare records
+            # for i, (logit_pair, label) in enumerate(zip(logits, labels)):
+            #     score_chosen = float(logit_pair[0])
+            #     score_rejected = float(logit_pair[1])
+            #     predicted_label = int(score_chosen > score_rejected)
+            #     correct = int(predicted_label == label)
 
-                records.append({
-                    "chosen_text": chosen_texts[i],
-                    "rejected_text": rejected_texts[i],
-                    "score_chosen": score_chosen,
-                    "score_rejected": score_rejected,
-                    "label": int(label),
-                    "predicted_label": predicted_label,
-                    "correct": correct,
-                })
+            #     records.append({
+            #         "chosen_text": chosen_texts[i],
+            #         "rejected_text": rejected_texts[i],
+            #         "score_chosen": score_chosen,
+            #         "score_rejected": score_rejected,
+            #         "label": int(label),
+            #         "predicted_label": predicted_label,
+            #         "correct": correct,
+            #     })
             results = self.trainer.evaluate()
-        return results, records
+        return results
 
     def eval_model_v2(self):
         # self.dataset_procesor.preprocess_data_reward(

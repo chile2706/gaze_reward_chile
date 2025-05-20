@@ -294,8 +294,8 @@ if __name__ == "__main__":
         use_quantization=use_quantization,
         concat=concat,
         use_softprompt=use_softprompt,
-        dataset_name=dataset_name,
-        # dataset_name= "Anthropic/hh-rlhf",
+        # dataset_name=dataset_name,
+        dataset_name= "Anthropic/hh-rlhf",
         # dataset_name="OpenAssistant/oasst1",
         # dataset_name="nvidia/HelpSteer2",
         dataset_split=dataset_split,
@@ -400,11 +400,11 @@ if __name__ == "__main__":
             fp_dropout,
         )
         print(f"\nFolder path is: {folder_name_path_eval}\n")
-        results, records = reward_trainer.eval_model(folder_name=folder_name_path_eval)
-        with open(folder_name_path_eval + f"/helpsteer_results_test_set_predictions.json", "w", encoding="utf-8") as f:
-            for record in records:
-                f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        with open(folder_name_path_eval + "/helpsteer_results_dataset_test.json", "w") as f:
+        results = reward_trainer.eval_model(folder_name=folder_name_path_eval)
+        # with open(folder_name_path_eval + f"/hh_results_test_set_predictions.json", "w", encoding="utf-8") as f:
+        #     for record in records:
+        #         f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        with open(folder_name_path_eval + "/hh_results_dataset_test.json", "w") as f:
             json.dump(results, f, indent=4)
         print("Finished saving test set predictions")
 
