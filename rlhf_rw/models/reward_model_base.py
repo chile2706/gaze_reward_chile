@@ -66,7 +66,7 @@ class MyRewardBase:
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
             # tokenizer = AutoTokenizer.from_pretrained(load_local_folder_name)
-            tokenizer = AutoTokenizer.from_pretrained(load_local_folder_name)
+            tokenizer = PreTrainedTokenizerFast.from_pretrained(load_local_folder_name)
         else:
             print("tokenizer = AutoTokenizer.from_pretrained(")
             tokenizer = AutoTokenizer.from_pretrained(
