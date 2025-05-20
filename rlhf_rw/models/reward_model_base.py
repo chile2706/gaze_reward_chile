@@ -59,6 +59,7 @@ class MyRewardBase:
             db_path="/content/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
         self.organic_eyetracking = pd.read_csv("/content/gaze_reward_chile/data/compute_organic_fixation_912.csv")
+        self.organic_eyetracking["sentence_x"] = self.organic_eyetracking["sentence_x"].str.replace(r"\\n", "\n", regex=True)
 
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
@@ -221,16 +222,16 @@ class MyRewardBase:
         row = self.organic_eyetracking[self.organic_eyetracking["sentence_x"] == given_sentence]
         if row.empty:
             print("Missing Sentence:", sentences[0])
-            raise ValueError("Sentence not found.")
-
-        # Parse the nested lists (stored as strings)
-        fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
-        fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
-        
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        # Convert to tensors directly
-        fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
-        fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
+            # raise ValueError("Sentence not found.")
+        else: 
+            # Parse the nested lists (stored as strings)
+            fixations = ast.literal_eval(row.iloc[0]["fixations_organic"])
+            fixations_attention_mask = ast.literal_eval(row.iloc[0]["attention_mask_organic"])
+            
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            # Convert to tensors directly
+            fixations = torch.tensor(fixations, dtype=torch.float32, device=device)       # shape: [1, seq_len]
+            fixations_attention_mask = torch.tensor(fixations_attention_mask, dtype=torch.long, device=device)  # shape: [1, seq_len]
         
         return (
             fixations,
