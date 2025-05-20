@@ -204,7 +204,7 @@ class MyRewardBase:
                 text_tokenized_fix,
                 sentences,
             ) = self.FP_model._compute_mapped_fixations(input_ids)
-            # print("compute fixations")
+            print("compute fixations")
         elif fixations_model_version == 2:
             (
                 fixations,
