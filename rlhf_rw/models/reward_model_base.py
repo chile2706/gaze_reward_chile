@@ -257,7 +257,7 @@ class MyRewardBase:
         # text = f"{fixations.shape}"
         # with open("/users/0/le000422/gaze_reward_chile/data/fixations_shape.jsonl", "w") as f:
         #     f.write(text)
-        fixations = fixations.unsqueeze(2)
+        # fixations = fixations.unsqueeze(2)
         fixations_projected = self.fixations_embedding_projector(fixations)
         # fixations = fixations.detach()
         # del fixations
