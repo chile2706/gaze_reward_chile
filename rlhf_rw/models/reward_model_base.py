@@ -58,8 +58,9 @@ class MyRewardBase:
         self.memory_storage = LMDBStorage(
             db_path="/content/gaze_reward_chile/rlhf_rw/buffer_train.lmdb"
         )
-        self.organic_eyetracking = pd.read_csv("/content/gaze_reward_chile/data/compute_organic_fixation_912.csv")
-        self.organic_eyetracking["sentence_x"] = self.organic_eyetracking["sentence_x"].str.replace(r"\\n", "\n", regex=True)
+        # self.organic_eyetracking = pd.read_csv("/content/gaze_reward_chile/data/compute_organic_fixation_912.csv")
+        self.organic_eyetracking = pd.read_csv("/users/0/le000422/gaze_reward_chile/data/compute_organic_fixation_912.csv")
+        # self.organic_eyetracking["sentence_x"] = self.organic_eyetracking["sentence_x"].str.replace(r"\\n", "\n", regex=True)
 
     def _load_tokenizer(self, load_local_folder_name=None):
         if load_local_folder_name:
